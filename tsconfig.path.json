@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "$blocks/*": ["./src/components/blocks/*"],
+      "$elements/*": ["./src/components/elements/*"],
+      "$layouts/*": ["./src/components/layouts/*"],
+      "$pages/*": ["./src/pages/*"],
+      "$hooks/*": ["./src/hooks/*"],
+      "$assets/*": ["./src/assets/*"],
+      "$utils/*": ["./src/utils/*"]
+    }
+  }
+}
