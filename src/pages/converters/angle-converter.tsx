@@ -22,12 +22,12 @@ export const AngleConverter = () => {
         <div>
             <label>Astetta</label>
             <input type="number" className="ml-2 text-black" onChange={handleDegreesChange} />
-            <p>prosenttia: {radians}</p>
+            <p>prosenttia: {radians.toFixed(2)}</p>
         </div>
         <div>
             <label>Prosenttia</label>
             <input type="number" className="ml-2 text-black" onChange={handleRadiansChange} />
-            <p>astetta: {degrees}</p>
+            <p>astetta: {degrees.toFixed(2)}</p>
         </div>
         </div>
     )
