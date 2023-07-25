@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -6,5 +6,5 @@ export default function Home() {
       <h1>Hello world</h1>
       <Link href="/muuntimet/kulma">Kulma laskuri</Link>
     </div>
-  )
+  );
 }
