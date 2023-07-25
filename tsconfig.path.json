@@ -5,7 +5,7 @@
       "$blocks/*": ["./src/components/blocks/*"],
       "$elements/*": ["./src/components/elements/*"],
       "$layouts/*": ["./src/components/layouts/*"],
-      "$pages/*": ["./src/pages/*"],
+      "$pages/*": ["./src/components/pages/*"],
       "$hooks/*": ["./src/hooks/*"],
       "$assets/*": ["./src/assets/*"],
       "$utils/*": ["./src/utils/*"]
