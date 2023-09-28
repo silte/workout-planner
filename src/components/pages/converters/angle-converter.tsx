@@ -1,45 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
+import { Heading } from '$elements/heading/heading';
+import { Input } from '$elements/input/input';
+import { Container } from '$layouts/container/container';
 import {
   convertDegreesToPercent,
   convertPercentToDegrees,
 } from '$utils/angle-helper';
 
+type AngleConverterValues = {
+  degrees: number;
+  percent: number;
+};
+
 export const AngleConverter = () => {
-  const [degrees, setDegrees] = useState<number>(0);
-  const [radians, setRadians] = useState<number>(0);
+  const methods = useForm<AngleConverterValues>({
+    defaultValues: {
+      degrees: 0,
+      percent: 0,
+    },
+  });
 
-  const handleDegreesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRadians(convertDegreesToPercent(e.target.value as unknown as number));
-  };
-
-  const handleRadiansChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDegrees(convertPercentToDegrees(e.target.value as unknown as number));
-  };
+  const percentInDegrees = convertPercentToDegrees(methods.watch('percent'));
+  const degreesInPercents = convertDegreesToPercent(methods.watch('degrees'));
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <h1>Kulma muunnin</h1>
-      <div>
-        <label>Astetta</label>
-        <input
-          type="number"
-          className="ml-2 text-black"
-          onChange={handleDegreesChange}
-        />
-        <p>prosenttia: {radians.toFixed(2)}</p>
-      </div>
-      <div>
-        <label>Prosenttia</label>
-        <input
-          type="number"
-          className="ml-2 text-black"
-          onChange={handleRadiansChange}
-        />
-        <p>astetta: {degrees.toFixed(2)}</p>
-      </div>
-    </div>
+    <Container className="flex flex-col items-center gap-4">
+      <Heading variant="h1">Kulma muunnin</Heading>
+      <FormProvider {...methods}>
+        <div>
+          <Input id="degrees" type="number">
+            Astetta
+          </Input>
+          <p>prosenttia: {degreesInPercents.toFixed(2)}</p>
+        </div>
+        <div>
+          <Input id="percent" type="number">
+            Prosenttia
+          </Input>
+          <p>astetta: {percentInDegrees.toFixed(2)}</p>
+        </div>
+      </FormProvider>
+    </Container>
   );
 };
