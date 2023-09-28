@@ -37,12 +37,12 @@ export const Button = ({
   const buttonClasses = clsx(
     'inline-flex justify-center w-full sm:w-auto rounded-md items-center py-3 px-6 focus:ring-2 focus:ring-offset-2 focus:outline-none transition ease-in-out duration-150 tracking-tight font-medium text-base hover:opacity-75 focus:opacity-75',
     {
-      ['bg-charcoal text-white focus:ring-charcoal']: accentColor === 'black',
-      ['bg-blue text-white focus:ring-blue']: accentColor === 'blue',
-      ['bg-gray text-black focus:ring-charcoal hover:bg-gray-dark border border-gray-dark focus:opacity-100 hover:opacity-100']:
+      ['bg-gray-800 text-white focus:ring-gray-800']: accentColor === 'black',
+      ['bg-blue-600 text-white focus:ring-blue-600']: accentColor === 'blue',
+      ['bg-gray-100 text-black focus:ring-gray-800 hover:bg-gray-dark border border-gray-dark focus:opacity-100 hover:opacity-100']:
         accentColor === 'plain',
       [className]: true,
-    }
+    },
   );
 
   if (typeof link === 'string' && link.length > 0 && !isDisabled) {

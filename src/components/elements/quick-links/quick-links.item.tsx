@@ -18,7 +18,7 @@ export const QuickLinksItem = ({
 }: IQuickLinksItemProps): JSX.Element => {
   const arrowSvgElement = (
     <span
-      className="absolute pointer-events-none text-gray-darkest top-6 right-6"
+      className="absolute pointer-events-none text-gray-600 top-6 right-6"
       aria-hidden="true"
     >
       <svg
@@ -35,21 +35,21 @@ export const QuickLinksItem = ({
   return (
     <section
       className={clsx(
-        'rounded-md p-6 bg-gray relative group focus-within:ring-2 focus-within:ring-inset focus-within:ring-black hover:bg-gray-dark focus-within:bg-gray-dark inline-flex items-center gap-4'
+        'rounded-md p-6 bg-gray-100 relative group focus-within:ring-2 focus-within:ring-inset focus-within:ring-black hover:bg-gray-dark focus-within:bg-gray-dark inline-flex items-center gap-4',
       )}
       data-testid={testId}
     >
       {iconName && (
-        <span className="inline-flex items-center justify-center rounded-full bg-gray-dark h-11 w-11 group-hover:bg-gray group-focus-within:bg-gray">
+        <span className="inline-flex items-center justify-center rounded-full bg-gray-dark h-11 w-11 group-hover:bg-gray-100 group-focus-within:bg-gray">
           <Icon
             type={iconName}
-            className={`stroke-charcoal flex-shrink-0 pointer-events-none`}
+            className={`stroke-gray-800 flex-shrink-0 pointer-events-none`}
           />
         </span>
       )}
       <Link
         url={link}
-        className="text-lg font-medium tracking-tighter truncate text-charcoal focus:outline-none"
+        className="text-lg font-medium tracking-tighter truncate text-gray-800 focus:outline-none"
         isAbsolute
       >
         {title}

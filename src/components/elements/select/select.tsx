@@ -42,13 +42,13 @@ export const Select = ({
     <div className={className}>
       <label
         htmlFor={id}
-        className="block text-xs font-medium leading-5 tracking-tight uppercase text-gray-darkest"
+        className="block text-xs font-medium leading-5 tracking-tight uppercase text-gray-600"
       >
         {children}
         <select
           data-testid={testId}
           id={id}
-          className="block w-full py-3 pl-3 pr-10 mt-1 text-base font-normal tracking-tight rounded-md bg-gray border-gray-dark hover:bg-gray-dark text-charcoal focus:outline-none focus:ring-black focus:border-black hover:cursor-pointer"
+          className="block w-full py-3 pl-3 pr-10 mt-1 text-base font-normal tracking-tight rounded-md bg-gray-100 border-gray-dark hover:bg-gray-dark text-gray-800 focus:outline-none focus:ring-black focus:border-black hover:cursor-pointer"
           required={isRequired}
           aria-describedby={help && `${id}-description`}
           disabled={isDisabled}
@@ -66,7 +66,7 @@ export const Select = ({
         </select>
       </label>
       {help && (
-        <p className="mt-2 text-sm text-charcoal" id={`${id}-description`}>
+        <p className="mt-2 text-sm text-gray-800" id={`${id}-description`}>
           {help}
         </p>
       )}

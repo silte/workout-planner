@@ -4,7 +4,7 @@ import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { DrawerHeader } from './drawer.header';
 
 import { useOnClickOutside } from '$hooks/useOnClickOutside';
-import { useWindowDimensions } from '$hooks/useWindowDimensions';
+// import { useWindowDimensions } from '$hooks/useWindowDimensions';
 
 interface DrawerProps {
   className?: string;
@@ -51,7 +51,7 @@ export const Drawer = ({
     const timeout = setTimeout(() => setIsOpenDelayed(isOpen), 50);
     const closedTimeout = setTimeout(
       () => setIsClosedDelay(!isOpen),
-      isOpen ? 0 : 200
+      isOpen ? 0 : 200,
     );
 
     return () => {
@@ -80,25 +80,25 @@ export const Drawer = ({
 
   const drawerClasses = {
     left: clsx('', {
-      ['top-0 bottom-0 overflow-y-auto']: true,
-      ['max-w-[600px] w-[75%]']: true,
-      ['max-[1440px]:right-0 min-[1440px]:max-w-[552px]']: true,
-      ['min-[1440px]:pr-[100vw] min-[1440px]:mr-[-100vw] min-[1440px]:right-[calc(calc(100vw-1440px)/2+1.5rem)]']:
-        true,
-      ['max-[1440px]:aria-hidden:-right-[100vw] min-[1440px]:aria-hidden:-right-[calc(100vw)]']:
-        true,
+      ['md:top-0 md:bottom-0 md:overflow-y-auto']: true,
+      ['md:max-w-[600px] md:w-[75%]']: true,
+      ['md:right-0']: true,
+      ['md:aria-hidden:-right-[100vw]']: true,
     }),
     bottom: clsx('', {
-      ['bottom-0 left-0 right-0 px-8 pb-12 pt-8']: true,
-      ['rounded-t-2xl box-content']: true,
-      ['aria-hidden:-bottom-[100vh]']: true,
+      ['max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:px-8 max-md:pb-12 max-md:pt-8']:
+        true,
+      ['max-md:rounded-t-2xl max-md:box-content']: true,
+      ['max-md:aria-hidden:-bottom-[100vh]']: true,
     }),
   };
 
-  const { width } = useWindowDimensions();
+  // const { width } = useWindowDimensions();
 
-  const defaultDrawerClasses =
-    width >= 1024 ? drawerClasses.left : drawerClasses.bottom;
+  // const defaultDrawerClasses =
+  //   width >= 1024 ? drawerClasses.left : drawerClasses.bottom;
+
+  const defaultDrawerClasses = clsx(drawerClasses.left, drawerClasses.bottom);
 
   const drawerBaseClasses = clsx('', {
     [className]: true,
@@ -132,7 +132,7 @@ export const Drawer = ({
             {
               ['z-10 opacity-100']: isOpen,
               ['-z-10 opacity-0']: !isOpen || !isOpenDelayed,
-            }
+            },
           )}
         />
       )}

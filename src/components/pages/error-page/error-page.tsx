@@ -62,7 +62,7 @@ export const ErrorPage = ({
             <li>
               <a
                 href="https://github.com/shamalainen"
-                className="text-blue-financer"
+                className="text-blue-600"
                 target={'_blank'}
               >
                 @shamalainen
@@ -72,7 +72,7 @@ export const ErrorPage = ({
             <li>
               <a
                 href="https://github.com/silte"
-                className="text-blue-financer"
+                className="text-blue-600"
                 target={'_blank'}
               >
                 @silte

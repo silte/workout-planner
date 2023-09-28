@@ -25,7 +25,7 @@ export const TransactionActionsItem = ({
       onClick={onClick}
       aria-label={ariaLabel}
     >
-      <span className="inline-flex items-center justify-center rounded-full bg-gray h-11 w-11 text-black/75">
+      <span className="inline-flex items-center justify-center rounded-full bg-gray-100 h-11 w-11 text-black/75">
         <Icon type={icon} />
       </span>
       <span className={clsx('text-sm tracking-tight mt-2')}>{label}</span>

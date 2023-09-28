@@ -29,7 +29,7 @@ export const MobileNavigationItem = ({
     <li>
       <Link
         href={url}
-        className={`flex flex-col items-center justify-center focus:text-charcoal hover:text-charcoal h-14`}
+        className={`flex flex-col items-center justify-center focus:text-gray-800 hover:text-gray-800 h-14`}
         onClick={onClick}
         aria-label={ariaLabel}
       >

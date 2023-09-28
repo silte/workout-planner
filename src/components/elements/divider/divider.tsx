@@ -19,9 +19,7 @@ export const Divider = ({
         <div className="w-full border-t border-gray-dark" />
       </div>
       <div className="relative flex justify-center">
-        <span className="px-4 text-sm bg-white text-gray-darkest">
-          {children}
-        </span>
+        <span className="px-4 text-sm bg-white text-gray-600">{children}</span>
       </div>
     </div>
   );

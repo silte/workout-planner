@@ -28,7 +28,7 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps): JSX.Element => {
   const [currentWindowWidth, setCurrentWindowWidth] = useState(
-    window.outerWidth
+    window.outerWidth,
   );
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
     return (
       <div className="bg-white">
         <Container className="grid grid-cols-[300px,1fr] min-h-screen px-0">
-          <aside className="after:bg-gray after:ml-[-100vw] after:pr-[100vw] after:absolute after:top-0 after:bottom-0 after:right-0 relative border-r border-gray-dark">
+          <aside className="after:bg-gray-100 after:ml-[-100vw] after:pr-[100vw] after:absolute after:top-0 after:bottom-0 after:right-0 relative border-r border-gray-dark">
             <div className="sticky top-0 z-10 min-h-screen pt-12 pb-12 pl-8 pr-4 bottom-12">
               <header>
                 <Link href="/" className="inline-flex items-center gap-3 mb-8">

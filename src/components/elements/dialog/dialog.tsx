@@ -53,10 +53,10 @@ export const Dialog = ({
   return (
     <dialog
       className={clsx(
-        'z-20 rounded-md backdrop:bg-charcoal backdrop:opacity-30 w-full max-sm:mb-[calc(78px+env(safe-area-inset-bottom))] p-0 lg:max-w-screen-sm',
+        'z-20 rounded-md backdrop:bg-gray-800 backdrop:opacity-30 w-full max-sm:mb-[calc(78px+env(safe-area-inset-bottom))] p-0 lg:max-w-screen-sm',
         {
           [className]: true,
-        }
+        },
       )}
       ref={ref}
     >

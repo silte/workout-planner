@@ -6,9 +6,11 @@
       "$elements/*": ["./src/components/elements/*"],
       "$layouts/*": ["./src/components/layouts/*"],
       "$pages/*": ["./src/components/pages/*"],
+      "$containers/*": ["./src/containers/*"],
       "$hooks/*": ["./src/hooks/*"],
       "$assets/*": ["./src/assets/*"],
-      "$utils/*": ["./src/utils/*"]
+      "$utils/*": ["./src/utils/*"],
+      "$types/*": ["./src/types/*"]
     }
   }
 }

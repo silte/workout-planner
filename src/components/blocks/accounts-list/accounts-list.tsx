@@ -41,7 +41,7 @@ export const AccountsList = ({
           >
             <span className="grid">
               <span className="text-black truncate">{rowLabel}</span>
-              <span className="text-sm font-normal tracking-tight truncate text-gray-darkest">
+              <span className="text-sm font-normal tracking-tight truncate text-gray-600">
                 <span className="sr-only">Balance: </span>
                 {balanceAmount}
               </span>

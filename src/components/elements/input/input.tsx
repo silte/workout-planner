@@ -43,14 +43,14 @@ export const Input = ({
     <div>
       <label
         htmlFor={id}
-        className="block text-xs font-medium leading-5 tracking-tight uppercase text-gray-darkest"
+        className="block text-xs font-medium leading-5 tracking-tight text-gray-600 uppercase"
       >
         {children}
       </label>
       <div className="relative mt-1 rounded-md">
         {isCurrency && (
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <span className="text-charcoal">€</span>
+            <span className="text-gray-800">€</span>
           </div>
         )}
         <input
@@ -61,8 +61,8 @@ export const Input = ({
           max={max}
           step={step}
           className={clsx(
-            'appearance-none block w-full px-3 py-3 border border-gray-dark bg-gray rounded-md focus:outline-none focus:ring-black focus:border-black text-charcoal tracking-tight',
-            { ['pl-7']: isCurrency }
+            'appearance-none block w-full px-3 py-3 border border-gray-dark bg-gray-100 rounded-md focus:outline-none focus:ring-black focus:border-black text-gray-800 tracking-tight',
+            { ['pl-7']: isCurrency },
           )}
           aria-describedby={help && `${id}-description`}
           required={isRequired}
@@ -76,7 +76,7 @@ export const Input = ({
         />
       </div>
       {help && (
-        <p className="mt-2 text-sm text-charcoal" id={`${id}-description`}>
+        <p className="mt-2 text-sm text-gray-800" id={`${id}-description`}>
           {help}
         </p>
       )}

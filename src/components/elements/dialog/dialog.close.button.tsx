@@ -11,11 +11,11 @@ export const DialogCloseButton = ({
 }: DialogCloseButtonProps) => {
   return (
     <button
-      className="inline-flex items-center justify-center rounded-full h-11 w-11 bg-gray hover:bg-gray-dark"
+      className="inline-flex items-center justify-center rounded-full h-11 w-11 bg-gray-100 hover:bg-gray-dark"
       onClick={() => setIsDialogOpen(!isDialogOpen)}
     >
       <span className="sr-only">Close dialog</span>
-      <Icon type={IconName.plus} className="rotate-45 stroke-gray-darkest" />
+      <Icon type={IconName.plus} className="rotate-45 stroke-gray-600" />
     </button>
   );
 };

@@ -13,7 +13,7 @@ export const DesktopHeader = (): JSX.Element => {
         {backLink && (
           <Link
             href={backLink}
-            className="inline-flex items-center justify-center border rounded-full h-11 w-11 bg-gray hover:bg-gray-dark border-gray-dark text-gray-darkest"
+            className="inline-flex items-center justify-center border rounded-full h-11 w-11 bg-gray-100 hover:bg-gray-dark border-gray-dark text-gray-600"
             data-testid="header-back-link"
           >
             <span className="sr-only">Go back</span>

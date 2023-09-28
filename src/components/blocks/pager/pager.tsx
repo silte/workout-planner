@@ -27,11 +27,11 @@ const PagerButton = ({
   return (
     <button
       className={clsx(
-        'h-11 w-11 inline-flex justify-center items-center group disabled:hover:cursor-not-allowed bg-gray border border-gray-dark rounded-full ',
+        'h-11 w-11 inline-flex justify-center items-center group disabled:hover:cursor-not-allowed bg-gray-100 border border-gray-dark rounded-full ',
         {
           [className]: true,
           ['hover:bg-gray-dark']: !isDisabled,
-        }
+        },
       )}
       onClick={handleClick}
       disabled={isDisabled}
@@ -40,7 +40,7 @@ const PagerButton = ({
       <span className="sr-only">{children}</span>
       <Icon
         type={isNext ? IconName.arrowRight : IconName.arrowLeft}
-        className="stroke-gray-darkest group-disabled:opacity-50"
+        className="stroke-gray-600 group-disabled:opacity-50"
       />
     </button>
   );
@@ -68,7 +68,7 @@ export const Pager = ({
           Previous page
         </PagerButton>
         {currentPage && pageCount && (
-          <p className="mx-4 font-medium tracking-tight text-charcoal">
+          <p className="mx-4 font-medium tracking-tight text-gray-800">
             <span className="sr-only">
               Current page: {currentPage} of {pageCount}
             </span>

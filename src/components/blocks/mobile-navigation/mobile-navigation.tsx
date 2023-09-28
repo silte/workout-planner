@@ -5,7 +5,7 @@ import { navigationItems } from '$constants/navigation-items';
 
 export const MobileNavigation = (): JSX.Element => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 w-full border-t bg-gray border-gray-dark pb-safe">
+    <div className="fixed bottom-0 left-0 right-0 z-10 w-full border-t bg-gray-100 border-gray-dark pb-safe">
       <nav>
         <ul className={`grid grid-cols-5 relative`}>
           <MobileNavigationItem {...navigationItems.home} isExact />

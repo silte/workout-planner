@@ -35,12 +35,12 @@ export const Notification = ({
   return (
     <section
       className={clsx(
-        'fixed bottom-[calc(78px+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-full max-w-sm overflow-hidden bg-charcoal rounded-md p-4 text-white z-20',
+        'fixed bottom-[calc(78px+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-full max-w-sm overflow-hidden bg-gray-800 rounded-md p-4 text-white z-20',
         {
           ['inline-block']: isOpen,
           ['hidden']: !isOpen,
           [className]: true,
-        }
+        },
       )}
       role="status"
     >

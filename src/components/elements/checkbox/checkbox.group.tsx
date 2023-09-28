@@ -13,7 +13,7 @@ export const CheckboxGroup = ({
 }: CheckboxGroupProps): JSX.Element => {
   return (
     <fieldset
-      className={`text-charcoal space-y-1 ${className}`}
+      className={`text-gray-800 space-y-1 ${className}`}
       data-testid={testId}
     >
       {label && <legend className="sr-only">{label}</legend>}

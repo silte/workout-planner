@@ -55,7 +55,7 @@ export const Heading = ({
       {ctaUrl && ctaLabel && (
         <Link
           href={ctaUrl}
-          className="flex-shrink-0 font-medium tracking-tight text-charcoal hover:underline"
+          className="flex-shrink-0 font-medium tracking-tight text-gray-800 hover:underline"
           data-entity-title={ctaEntityTitle ?? undefined}
         >
           {ctaLabel}

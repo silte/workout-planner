@@ -24,18 +24,18 @@ export const InfoCard = ({
 }: InfoCardProps): JSX.Element => {
   return (
     <section
-      className={clsx('rounded-md p-6 bg-gray border border-gray-dark', {
+      className={clsx('rounded-md p-6 bg-gray-100 border border-gray-dark', {
         [className]: true,
       })}
     >
       {iconName && (
         <span
           className={clsx(
-            'inline-flex items-center justify-center mb-6 bg-charcoal rounded-full h-11 w-11',
+            'inline-flex items-center justify-center mb-6 bg-gray-800 rounded-full h-11 w-11',
             {
               ['max-md:h-9 max-md:w-9 max-md:mb-3']: !isLarge && !isSmall,
               ['h-9 w-9 mb-3']: isSmall,
-            }
+            },
           )}
         >
           <Icon
@@ -48,13 +48,10 @@ export const InfoCard = ({
         </span>
       )}
       <Heading
-        titleClassName={clsx(
-          '!font-medium truncate text-gray-darkest !text-lg',
-          {
-            ['max-md:!text-sm']: !isLarge && !isSmall,
-            ['!text-sm']: isSmall,
-          }
-        )}
+        titleClassName={clsx('!font-medium truncate text-gray-600 !text-lg', {
+          ['max-md:!text-sm']: !isLarge && !isSmall,
+          ['!text-sm']: isSmall,
+        })}
       >
         {label}
       </Heading>
@@ -64,7 +61,7 @@ export const InfoCard = ({
           {
             ['max-md:text-xl']: !isLarge && !isSmall,
             ['text-xl']: isSmall,
-          }
+          },
         )}
         data-testid={testId}
       >

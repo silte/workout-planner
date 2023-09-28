@@ -15,7 +15,7 @@ export const Alert = ({
 }: AlertProps): JSX.Element => {
   return (
     <div
-      className="p-4 mb-6 text-white rounded-md bg-charcoal"
+      className="p-4 mb-6 text-white rounded-md bg-gray-800"
       data-testid={testId}
     >
       <div className="flex gap-4">
