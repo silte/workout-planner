@@ -21,6 +21,7 @@ export const Heading = ({
   children,
   titleClassName = '',
   className = '',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   style,
   testId,
   ctaLabel,
@@ -28,7 +29,7 @@ export const Heading = ({
   ctaEntityTitle,
 }: HeadingProps) => {
   const HeadingType = variant;
-  const styleToApply = style || variant;
+  // const styleToApply = style || variant;
 
   const headingSize = clsx('text-lg font-medium tracking-tight');
 
