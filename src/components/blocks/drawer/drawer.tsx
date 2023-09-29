@@ -34,7 +34,7 @@ export const Drawer = ({
   const [isOpenDelayed, setIsOpenDelayed] = useState(false);
   const [isClosedDelay, setIsClosedDelay] = useState(true);
 
-  const drawerRef = useRef(null);
+  const drawerRef = useRef<HTMLElement>(null);
   const targetRefsArray = useMemo(() => {
     const allowedRefsArray = Array.isArray(allowedRefs)
       ? allowedRefs
@@ -43,9 +43,13 @@ export const Drawer = ({
     return [drawerRef, ...allowedRefsArray];
   }, [allowedRefs]);
 
-  useOnClickOutside(targetRefsArray, () => {
-    onClose();
-  });
+  useOnClickOutside(
+    targetRefsArray,
+    () => {
+      onClose();
+    },
+    isOpen,
+  );
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsOpenDelayed(isOpen), 50);

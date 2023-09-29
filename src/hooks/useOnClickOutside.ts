@@ -1,23 +1,29 @@
-import { useEffect } from 'react';
+import { RefObject, useEffect, useMemo } from 'react';
+
+type EventType = TouchEvent | MouseEvent;
 
 export const useOnClickOutside = (
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  ref: any,
-  handler: any,
-  secondaryRef: any = undefined,
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+  ref: RefObject<HTMLElement> | RefObject<HTMLElement>[],
+  handler: (event: EventType) => void,
+  isActive = true,
 ) => {
+  const refArray = useMemo(() => (Array.isArray(ref) ? ref : [ref]), [ref]);
+
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const listener = (event: any) => {
-      if (!ref.current || ref.current?.contains(event.target)) {
+    if (!isActive) return;
+
+    const listener = (event: EventType) => {
+      if (
+        refArray.some(
+          (currentRef) =>
+            !currentRef.current ||
+            currentRef.current?.contains(event.target as Node),
+        )
+      ) {
         return;
       }
 
-      if (
-        typeof secondaryRef !== 'undefined' &&
-        (!secondaryRef.current || secondaryRef.current?.contains(event.target))
-      ) {
+      if ((event.target as HTMLElement)?.classList?.contains('loader')) {
         return;
       }
 
@@ -31,5 +37,5 @@ export const useOnClickOutside = (
       document.removeEventListener('mousedown', listener);
       document.removeEventListener('touchstart', listener);
     };
-  }, [ref, secondaryRef, handler]);
+  }, [handler, refArray, isActive]);
 };
