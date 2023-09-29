@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useMemo, useState } from 'react';
+import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 
 import { Form } from '$blocks/form/form';
 import { Button } from '$elements/button/button';
@@ -10,7 +10,38 @@ import { Input } from '$elements/input/input';
 import { Container } from '$layouts/container/container';
 import { EditInterval } from '$pages/add-workout/edit-interval';
 import { IntervalListRow } from '$pages/add-workout/interval-list-row';
-import { WorkoutTemplate } from '$types/workout';
+import { IntervalTemplate, WorkoutTemplate } from '$types/workout';
+import { calculateIntervalSummary } from '$utils/interval-helper';
+
+const IntervalSummary = () => {
+  const intervals = useWatch({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    name: `intervals` as any,
+  }) as IntervalTemplate[];
+
+  const summary = useMemo(
+    () =>
+      (intervals ?? [])
+        .map((interval) => calculateIntervalSummary(interval))
+        .reduce(
+          (acc, curr) => ({
+            distance: acc.distance + curr.distance,
+            ascent: acc.ascent + curr.ascent,
+          }),
+          { distance: 0, ascent: 0 },
+        ),
+    [intervals],
+  );
+
+  return (
+    <dl className="mt-6">
+      <dt className="font-bold">Kokonais matka</dt>
+      <dd>{summary.distance} m</dd>
+      <dt className="font-bold">Kokonais nousu</dt>
+      <dd>{summary.ascent} m</dd>
+    </dl>
+  );
+};
 
 type AddWorkoutFormValues = WorkoutTemplate;
 
@@ -68,6 +99,7 @@ export const AddWorkoutContainer = () => {
             </tbody>
           </table>
         </div>
+        <IntervalSummary />
         <EditInterval
           onClose={() => setIntervalToEdit(NaN)}
           index={intervalToEdit}
