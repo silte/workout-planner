@@ -24,7 +24,7 @@ export const InfoCard = ({
 }: InfoCardProps): JSX.Element => {
   return (
     <section
-      className={clsx('rounded-md p-6 bg-gray-100 border border-gray-dark', {
+      className={clsx('rounded-md p-6 bg-gray-100 border border-gray-200', {
         [className]: true,
       })}
     >

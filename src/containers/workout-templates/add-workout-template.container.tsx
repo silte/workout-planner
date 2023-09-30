@@ -1,12 +1,14 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useMemo, useState } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 
 import { Form } from '$blocks/form/form';
 import { Button } from '$elements/button/button';
 import { Heading } from '$elements/heading/heading';
 import { Input } from '$elements/input/input';
+import { useWorkoutTemplates } from '$hooks/useWorkoutTemplates';
 import { Container } from '$layouts/container/container';
 import { EditInterval } from '$pages/add-workout/edit-interval';
 import { IntervalListRow } from '$pages/add-workout/interval-list-row';
@@ -46,6 +48,10 @@ const IntervalSummary = () => {
 type AddWorkoutFormValues = WorkoutTemplate;
 
 export const AddWorkoutContainer = () => {
+  const { push } = useRouter();
+
+  const [, setWorkoutTemplates] = useWorkoutTemplates();
+
   const [intervalToEdit, setIntervalToEdit] = useState<number>(NaN);
 
   const formMethods = useForm<AddWorkoutFormValues>({
@@ -59,22 +65,43 @@ export const AddWorkoutContainer = () => {
     control: formMethods.control,
   });
 
-  const addInterval = () => {
+  const addInterval = useCallback(() => {
+    const index = fields?.length ?? 0;
     append({
       id: crypto.randomUUID(),
       name: '',
       duration: 0,
       angle: 0,
       speed: 0,
+      index,
     });
-  };
+    setIntervalToEdit(index);
+  }, [append, fields.length]);
+
+  const onSave = useCallback(
+    (values: AddWorkoutFormValues) => {
+      const formattedValues = {
+        ...values,
+        intervals: values.intervals.map((interval, index) => ({
+          ...interval,
+          index,
+        })),
+      };
+
+      setWorkoutTemplates((prev) => [...prev, formattedValues]);
+      push('/harjoitukset');
+    },
+    [push, setWorkoutTemplates],
+  );
 
   return (
     <Container>
       <Heading variant="h1">Lisää harjoitus</Heading>
-      <Form methods={formMethods} onSubmit={console.log} submitLabel="Lisää">
+      <Form methods={formMethods} onSubmit={onSave} submitLabel="Lisää">
         <div className="flex flex-col gap-4">
-          <Input id="name">Nimi</Input>
+          <Input id="name" isRequired>
+            Nimi
+          </Input>
           <Button accentColor="blue" onClick={addInterval}>
             Lisää
           </Button>

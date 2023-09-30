@@ -35,12 +35,12 @@ export const QuickLinksItem = ({
   return (
     <section
       className={clsx(
-        'rounded-md p-6 bg-gray-100 relative group focus-within:ring-2 focus-within:ring-inset focus-within:ring-black hover:bg-gray-dark focus-within:bg-gray-dark inline-flex items-center gap-4',
+        'rounded-md p-6 bg-gray-100 relative group focus-within:ring-2 focus-within:ring-inset focus-within:ring-black hover:bg-gray-200 focus-within:bg-gray-200 inline-flex items-center gap-4',
       )}
       data-testid={testId}
     >
       {iconName && (
-        <span className="inline-flex items-center justify-center rounded-full bg-gray-dark h-11 w-11 group-hover:bg-gray-100 group-focus-within:bg-gray">
+        <span className="inline-flex items-center justify-center rounded-full bg-gray-200 h-11 w-11 group-hover:bg-gray-100 group-focus-within:bg-gray">
           <Icon
             type={iconName}
             className={`stroke-gray-800 flex-shrink-0 pointer-events-none`}

@@ -39,7 +39,7 @@ export const Button = ({
     {
       ['bg-gray-800 text-white focus:ring-gray-800']: accentColor === 'black',
       ['bg-blue-600 text-white focus:ring-blue-600']: accentColor === 'blue',
-      ['bg-gray-100 text-black focus:ring-gray-800 hover:bg-gray-dark border border-gray-dark focus:opacity-100 hover:opacity-100']:
+      ['bg-gray-100 text-black focus:ring-gray-800 hover:bg-gray-200 border border-gray-200 focus:opacity-100 hover:opacity-100']:
         accentColor === 'plain',
       [className]: true,
     },

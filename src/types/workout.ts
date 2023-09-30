@@ -1,5 +1,6 @@
 export type IntervalTemplate = {
   id: string;
+  index: number;
   name: string;
   /** Duration in seconds */
   duration: number;

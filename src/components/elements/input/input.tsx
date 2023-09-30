@@ -61,7 +61,7 @@ export const Input = ({
           max={max}
           step={step}
           className={clsx(
-            'appearance-none block w-full px-3 py-3 border border-gray-dark bg-gray-100 rounded-md focus:outline-none focus:ring-black focus:border-black text-gray-800 tracking-tight',
+            'appearance-none block w-full px-3 py-3 border border-gray-200 bg-gray-100 rounded-md focus:outline-none focus:ring-black focus:border-black text-gray-800 tracking-tight',
             { ['pl-7']: isCurrency },
           )}
           aria-describedby={help && `${id}-description`}

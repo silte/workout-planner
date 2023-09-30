@@ -1,10 +1,5 @@
-import Link from 'next/link';
+import { ListWorkoutTemplatesContainer } from '$containers/workout-templates/list-workout-templates.container';
 
 export default function WorkoutsPage() {
-  return (
-    <div>
-      <h1>Hello world</h1>
-      <Link href="/harjoitukset/lisaa">Lisää harjoitus</Link>
-    </div>
-  );
+  return <ListWorkoutTemplatesContainer />;
 }

@@ -1,6 +1,7 @@
 import { useWatch } from 'react-hook-form';
 
 import { Button } from '$elements/button/button';
+import { Icon, IconName } from '$elements/icon/icon';
 import { IntervalTemplate } from '$types/workout';
 
 type IntervalListProps = {
@@ -26,8 +27,12 @@ export const IntervalListRow = ({
       <td>{field.angle}</td>
       <td>{field.speed}</td>
       <td>
-        <Button onClick={onEdit}>muokkaa</Button>
-        <Button onClick={onRemove}>poista</Button>
+        <Button onClick={onEdit} className="mr-2">
+          <Icon type={IconName.pencil} />
+        </Button>
+        <Button onClick={onRemove}>
+          <Icon type={IconName.trash} />
+        </Button>
       </td>
     </tr>
   );

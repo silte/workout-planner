@@ -48,7 +48,7 @@ export const Select = ({
         <select
           data-testid={testId}
           id={id}
-          className="block w-full py-3 pl-3 pr-10 mt-1 text-base font-normal tracking-tight rounded-md bg-gray-100 border-gray-dark hover:bg-gray-dark text-gray-800 focus:outline-none focus:ring-black focus:border-black hover:cursor-pointer"
+          className="block w-full py-3 pl-3 pr-10 mt-1 text-base font-normal tracking-tight rounded-md bg-gray-100 border-gray-200 hover:bg-gray-200 text-gray-800 focus:outline-none focus:ring-black focus:border-black hover:cursor-pointer"
           required={isRequired}
           aria-describedby={help && `${id}-description`}
           disabled={isDisabled}
