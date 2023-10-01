@@ -102,7 +102,7 @@ export const AddWorkoutContainer = () => {
             <thead>
               <tr>
                 <th>Nimi</th>
-                <th>Kesto (s)</th>
+                <th>Kesto</th>
                 <th>Kulma (astetta)</th>
                 <th>Nopeus (km/h)</th>
               </tr>

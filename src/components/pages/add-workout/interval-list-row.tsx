@@ -3,6 +3,7 @@ import { useWatch } from 'react-hook-form';
 import { Button } from '$elements/button/button';
 import { Icon, IconName } from '$elements/icon/icon';
 import { IntervalTemplate } from '$types/workout';
+import { calculateIntervalSummary } from '$utils/interval-helper';
 
 type IntervalListProps = {
   index: number;
@@ -20,10 +21,12 @@ export const IntervalListRow = ({
     name: `intervals.${index}` as any,
   }) as IntervalTemplate;
 
+  const summary = calculateIntervalSummary(field);
+
   return (
     <tr>
       <td>{field.name}</td>
-      <td>{field.duration}</td>
+      <td>{summary.formatted.duration}</td>
       <td>{field.angle}</td>
       <td>{field.speed}</td>
       <td>

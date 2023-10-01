@@ -34,7 +34,7 @@ export const ListWorkoutTemplatesContainer = () => {
 
           return (
             <LinkListLink
-              link={`#harjoitukset/suunnitelmat/${id}`}
+              link={`/harjoitukset/suunnitelmat/${id}`}
               testId="workout-template-row"
               key={id}
             >
