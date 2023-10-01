@@ -13,7 +13,7 @@ import { Container } from '$layouts/container/container';
 import { EditInterval } from '$pages/add-workout/edit-interval';
 import { IntervalListRow } from '$pages/add-workout/interval-list-row';
 import { IntervalTemplate, WorkoutTemplate } from '$types/workout';
-import { calculateIntervalSummary } from '$utils/interval-helper';
+import { calculateIntervalsTotalSummary } from '$utils/interval-helper';
 
 const IntervalSummary = () => {
   const intervals = useWatch({
@@ -22,25 +22,18 @@ const IntervalSummary = () => {
   }) as IntervalTemplate[];
 
   const summary = useMemo(
-    () =>
-      (intervals ?? [])
-        .map((interval) => calculateIntervalSummary(interval))
-        .reduce(
-          (acc, curr) => ({
-            distance: acc.distance + curr.distance,
-            ascent: acc.ascent + curr.ascent,
-          }),
-          { distance: 0, ascent: 0 },
-        ),
+    () => calculateIntervalsTotalSummary(intervals ?? []),
     [intervals],
   );
 
   return (
     <dl className="mt-6">
+      <dt className="font-bold">Kokonais kesto</dt>
+      <dd>{summary.formatted.duration}</dd>
       <dt className="font-bold">Kokonais matka</dt>
-      <dd>{summary.distance} m</dd>
+      <dd>{summary.formatted.distance}</dd>
       <dt className="font-bold">Kokonais nousu</dt>
-      <dd>{summary.ascent} m</dd>
+      <dd>{summary.formatted.ascent}</dd>
     </dl>
   );
 };

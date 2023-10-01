@@ -22,9 +22,9 @@ const EditIntervalSummary = ({ index }: EditIntervalSummaryProps) => {
   return (
     <dl className="mt-6">
       <dt className="font-bold">Matka</dt>
-      <dd>{summary.distance} m</dd>
+      <dd>{summary.formatted.distance}</dd>
       <dt className="font-bold">Nousu</dt>
-      <dd>{summary.ascent} m</dd>
+      <dd>{summary.formatted.ascent}</dd>
     </dl>
   );
 };
