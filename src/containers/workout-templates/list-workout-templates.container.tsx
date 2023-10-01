@@ -14,7 +14,7 @@ export const ListWorkoutTemplatesContainer = () => {
     <Container>
       <Heading variant="h1">Harjoitukset</Heading>
       <LinkList>
-        <LinkListLink link="/harjoitukset/lisaa">
+        <LinkListLink link="/harjoitukset/suunnitelmat/lisaa">
           Lisää suunniteltu harjoitus
         </LinkListLink>
       </LinkList>

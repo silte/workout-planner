@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export const useLocalStorage = <ValueType = never>(
   key: string,
@@ -37,5 +37,8 @@ export const useLocalStorage = <ValueType = never>(
     [key],
   );
 
-  return [storedValue, setValue] as const;
+  return useMemo(
+    () => [storedValue, setValue] as const,
+    [storedValue, setValue],
+  );
 };

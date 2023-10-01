@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useLocalStorage } from './useLocalStorage';
 
@@ -10,11 +10,16 @@ export const useWorkoutTemplates = () => {
 
 export const useWorkoutTemplate = (id: string) => {
   const [templates] = useWorkoutTemplates();
-  return templates.find((template) => template.id === id);
+
+  return useMemo(
+    () => templates.find((template) => template.id === id),
+    [templates, id],
+  );
 };
 
 export const useDeleteWorkoutTemplate = () => {
   const [, setTemplates] = useWorkoutTemplates();
+
   return useCallback(
     (id: string) => {
       setTemplates((templates) =>

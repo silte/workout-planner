@@ -1,8 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { notFound } from 'next/navigation';
-import { useState } from 'react';
+import { notFound, useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import { DialogConfirm } from '$elements/dialog/confirm/dialog.confirm';
 import { Dialog } from '$elements/dialog/dialog';
@@ -64,6 +64,8 @@ type WorkoutTemplateDetailsContainerProps = {
 export const WorkoutTemplateDetailsContainer = ({
   id,
 }: WorkoutTemplateDetailsContainerProps) => {
+  const { push } = useRouter();
+
   const template = useWorkoutTemplate(id);
 
   const handleDelete = useDeleteWorkoutTemplate();
@@ -71,6 +73,11 @@ export const WorkoutTemplateDetailsContainer = ({
   if (!template) {
     notFound();
   }
+
+  const onDelete = useCallback(() => {
+    handleDelete(id);
+    push('/harjoitukset');
+  }, [handleDelete, id, push]);
 
   const overallSummary = calculateIntervalsTotalSummary(template.intervals);
 
@@ -93,13 +100,13 @@ export const WorkoutTemplateDetailsContainer = ({
         </section>
         <LinkList isVertical>
           <LinkListLink
-            link={`#/harjoitukset/suunnitelmat/${id}/muokkaa`}
+            link={`/harjoitukset/suunnitelmat/${id}/muokkaa`}
             testId="edit-workout-template"
             icon={IconName.cog}
           >
             Muokkaa
           </LinkListLink>
-          <WorkoutTemplateDeleteModal onDelete={() => handleDelete(id)} />
+          <WorkoutTemplateDeleteModal onDelete={onDelete} />
         </LinkList>
       </section>
       <table className="w-full text-left">
