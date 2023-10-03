@@ -36,7 +36,7 @@ export const DialogConfirm = ({
           accentColor="plain"
           testId={`${testId}_cancel-button`}
         >
-          Cancel
+          Peruuta
         </Button>
       </ButtonGroup>
     </section>

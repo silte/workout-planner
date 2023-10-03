@@ -44,7 +44,7 @@ export const AddWorkoutContainer = () => {
       initialValues={initialValues}
       onSave={onSave}
       title="Lisää suunniteltu harjoitus"
-      submitLabel="Lisää"
+      submitLabel="Tallenna"
     />
   );
 };

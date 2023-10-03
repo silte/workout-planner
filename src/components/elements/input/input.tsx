@@ -1,44 +1,29 @@
 import clsx from 'clsx';
-import React, { ChangeEvent } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { ChangeEvent, useCallback } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
 
-interface InputProps {
+import { secondsToTime, timeToSeconds } from '$utils/time-helper';
+
+interface BaseInputProps {
   children: React.ReactNode;
   help?: string;
   id: string;
   isCurrency?: boolean;
-  isRequired?: boolean;
-  type?: 'text' | 'number' | 'datetime-local';
-  value?: string | number;
-  min?: number;
-  max?: number;
+  type?: 'text' | 'number' | 'time';
   step?: number;
-  ref?: React.MutableRefObject<null>;
-  onChange?(event: ChangeEvent<HTMLInputElement>): void;
   testId?: string;
 }
 
-const getValueParsingOptions = (type: InputProps['type']) => {
-  if (type === 'number') return { valueAsNumber: true };
-  if (type === 'datetime-local') return { valueAsDate: true };
+type InternalInputProps = BaseInputProps &
+  React.InputHTMLAttributes<HTMLInputElement>;
 
-  return {};
-};
-
-export const Input = ({
-  children,
-  help = '',
-  id,
-  isCurrency = false,
-  isRequired = false,
-  type = 'text',
-  min,
-  max,
-  step,
-  testId,
-}: InputProps): JSX.Element => {
-  const { register } = useFormContext();
-
+export const InternalInput = React.forwardRef<
+  HTMLInputElement,
+  InternalInputProps
+>(function InternalInput(
+  { children, help = '', id, isCurrency = false, testId, ...props },
+  ref,
+) {
   return (
     <div>
       <label
@@ -54,25 +39,15 @@ export const Input = ({
           </div>
         )}
         <input
+          ref={ref}
           id={id}
-          type={type}
-          inputMode={type === 'number' ? 'decimal' : undefined}
-          min={min}
-          max={max}
-          step={step}
+          data-testid={testId}
+          {...props}
           className={clsx(
             'appearance-none block w-full px-3 py-3 border border-gray-200 bg-gray-100 rounded-md focus:outline-none focus:ring-black focus:border-black text-gray-800 tracking-tight',
+            props.className,
             { ['pl-7']: isCurrency },
           )}
-          aria-describedby={help && `${id}-description`}
-          required={isRequired}
-          data-testid={testId}
-          {...register(id, {
-            min,
-            max,
-            required: isRequired,
-            ...getValueParsingOptions(type),
-          })}
         />
       </div>
       {help && (
@@ -81,5 +56,68 @@ export const Input = ({
         </p>
       )}
     </div>
+  );
+});
+
+interface InputProps extends BaseInputProps {
+  isRequired?: boolean;
+  min?: number;
+  max?: number;
+  testId?: string;
+}
+
+export const Input = ({
+  id,
+  isRequired = false,
+  type = 'text',
+  min,
+  max,
+  ...props
+}: InputProps): JSX.Element => {
+  const { register } = useFormContext();
+
+  const getValueParsingOptions = useCallback(() => {
+    if (type === 'number') return { valueAsNumber: true };
+
+    return {};
+  }, [type]);
+
+  return (
+    <InternalInput
+      id={id}
+      type={type}
+      {...props}
+      {...register(id, {
+        min,
+        max,
+        required: isRequired,
+        ...getValueParsingOptions(),
+      })}
+    />
+  );
+};
+
+type TimeInputProps = Omit<BaseInputProps, 'type'> & {
+  isRequired?: boolean;
+};
+
+export const TimeInput = ({ id, isRequired, ...props }: TimeInputProps) => {
+  const { field } = useController({
+    name: id,
+    rules: { required: isRequired },
+  });
+
+  return (
+    <InternalInput
+      id={id}
+      type={'time'}
+      {...props}
+      {...field}
+      value={secondsToTime(field.value)}
+      onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        field.onChange(timeToSeconds(event.target.value));
+        field.onBlur();
+      }}
+    />
   );
 };

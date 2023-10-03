@@ -3,7 +3,7 @@ import { useWatch } from 'react-hook-form';
 
 import { Drawer } from '$blocks/drawer/drawer';
 import { Heading } from '$elements/heading/heading';
-import { Input } from '$elements/input/input';
+import { Input, TimeInput } from '$elements/input/input';
 import { IntervalTemplate } from '$types/workout';
 import { calculateIntervalSummary } from '$utils/interval-helper';
 
@@ -42,9 +42,9 @@ export const EditInterval = ({ onClose, index }: EditIntervalProps) => {
       <div className="m-4">
         <Heading variant="h2">Muokkaa intervallia</Heading>
         <Input id={`intervals.${index}.name`}>Nimi</Input>
-        <Input id={`intervals.${index}.duration`} type={'number'}>
-          Kesto (s)
-        </Input>
+        <TimeInput id={`intervals.${index}.duration`} step={1}>
+          Kesto
+        </TimeInput>
         <Input id={`intervals.${index}.angle`} type={'number'}>
           Kulma (astetta)
         </Input>

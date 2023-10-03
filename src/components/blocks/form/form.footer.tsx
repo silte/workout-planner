@@ -22,7 +22,7 @@ export const FormFooter = ({
             {submitLabel}
           </Button>
           <Button accentColor="plain" link={formFooterBackLink} testId="cancel">
-            Cancel
+            Peruuta
           </Button>
         </ButtonGroup>
       </div>
