@@ -11,8 +11,22 @@ export type IntervalTemplate = {
   description?: string;
 };
 
+export enum SpeedUnit {
+  KMH = 'km/h',
+  MINKM = 'min/km',
+}
+
+export enum AngleUnit {
+  DEGREES = '°',
+  PERCENTAGE = '%',
+}
+
 export type WorkoutTemplate = {
   id: string;
   name: string;
+  /** Unit speed that will be displayed in forms and UI, data is always kmh */
+  speedUnit: SpeedUnit;
+  /** Unit angle that will be displayed in forms and UI, data is always degrees */
+  angleUnit: AngleUnit;
   intervals: IntervalTemplate[];
 };

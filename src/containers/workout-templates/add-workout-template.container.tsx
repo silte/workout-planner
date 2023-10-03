@@ -8,6 +8,7 @@ import {
   WorkoutTemplateForm,
   WorkoutTemplateFormValues,
 } from '$pages/workout-template-form/workout-template-form';
+import { AngleUnit, SpeedUnit } from '$types/workout';
 
 export const AddWorkoutContainer = () => {
   const { push } = useRouter();
@@ -35,6 +36,8 @@ export const AddWorkoutContainer = () => {
       id: crypto.randomUUID(),
       name: '',
       intervals: [],
+      speedUnit: SpeedUnit.KMH,
+      angleUnit: AngleUnit.DEGREES,
     }),
     [],
   );

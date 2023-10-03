@@ -79,23 +79,25 @@ export const WorkoutTemplateDetailsContainer = ({
     push('/harjoitukset');
   }, [handleDelete, id, push]);
 
-  const overallSummary = calculateIntervalsTotalSummary(template.intervals);
+  const { name, intervals, speedUnit, angleUnit } = template;
+
+  const { formatted } = calculateIntervalsTotalSummary(intervals);
 
   return (
     <Container>
       <Heading variant="h1" className="mb-12">
-        {template.name}
+        {name}
       </Heading>
       <section className={'mb-6 grid md:grid-cols-2 gap-4 md:gap-6'}>
         <section className={clsx('grid gap-2')}>
           <InfoCard label="Kesto" testId="workout-template-duration" isLarge>
-            {overallSummary.formatted.duration}
+            {formatted.duration}
           </InfoCard>
           <InfoCard label="Matka" testId="workout-template-distance" isSmall>
-            {overallSummary.formatted.distance}
+            {formatted.distance}
           </InfoCard>
           <InfoCard label="Nousu" testId="workout-template-ascent" isSmall>
-            {overallSummary.formatted.ascent}
+            {formatted.ascent}
           </InfoCard>
         </section>
         <LinkList isVertical>
@@ -116,13 +118,18 @@ export const WorkoutTemplateDetailsContainer = ({
             <th>Kesto</th>
             <th>Matka</th>
             <th>Nousu</th>
-            <th>Kulma (astetta)</th>
-            <th>Nopeus (km/h)</th>
+            <th>Kulma ({angleUnit})</th>
+            <th>Nopeus ({speedUnit})</th>
           </tr>
         </thead>
         <tbody>
           {template.intervals.map((interval) => (
-            <WorkoutDetailsIntervalListRow key={interval.id} {...interval} />
+            <WorkoutDetailsIntervalListRow
+              key={interval.id}
+              {...interval}
+              speedUnit={speedUnit}
+              angleUnit={angleUnit}
+            />
           ))}
         </tbody>
       </table>

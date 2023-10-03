@@ -4,15 +4,23 @@ import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 
+import { IntervalListHeader } from './interval-list-header';
+
 import { Form } from '$blocks/form/form';
 import { Button } from '$elements/button/button';
 import { Heading } from '$elements/heading/heading';
 import { InfoCard } from '$elements/info-card/info-card';
 import { Input } from '$elements/input/input';
+import { Select } from '$elements/select/select';
 import { Container } from '$layouts/container/container';
 import { EditInterval } from '$pages/workout-template-form/edit-interval';
 import { IntervalListRow } from '$pages/workout-template-form/interval-list-row';
-import { IntervalTemplate, WorkoutTemplate } from '$types/workout';
+import {
+  AngleUnit,
+  IntervalTemplate,
+  SpeedUnit,
+  WorkoutTemplate,
+} from '$types/workout';
 import { calculateIntervalsTotalSummary } from '$utils/interval-helper';
 
 const IntervalSummary = () => {
@@ -40,6 +48,28 @@ const IntervalSummary = () => {
     </section>
   );
 };
+
+const speedUnitOptions = [
+  {
+    label: 'km/h',
+    value: SpeedUnit.KMH,
+  },
+  {
+    label: 'min/km',
+    value: SpeedUnit.MINKM,
+  },
+];
+
+const angleUnitOptions = [
+  {
+    label: 'astetta',
+    value: AngleUnit.DEGREES,
+  },
+  {
+    label: 'prosenttia',
+    value: AngleUnit.PERCENTAGE,
+  },
+];
 
 type WorkoutTemplateFormProps = {
   initialValues: WorkoutTemplate;
@@ -88,17 +118,18 @@ export const WorkoutTemplateForm = ({
           <Input id="name" isRequired>
             Nimi
           </Input>
+          <Select id={'speedUnit'} options={speedUnitOptions}>
+            Nopeuden yksikkö
+          </Select>
+          <Select id={'angleUnit'} options={angleUnitOptions}>
+            Kulman yksikkö
+          </Select>
           <Button accentColor="blue" onClick={addInterval}>
             Lisää
           </Button>
           <table className="w-full text-left">
             <thead>
-              <tr>
-                <th>Nimi</th>
-                <th>Kesto</th>
-                <th>Kulma (astetta)</th>
-                <th>Nopeus (km/h)</th>
-              </tr>
+              <IntervalListHeader />
             </thead>
             <tbody>
               {fields.map((field, index) => (
