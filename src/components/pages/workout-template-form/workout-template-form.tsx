@@ -111,7 +111,7 @@ export const WorkoutTemplateForm = ({
   }, [append, fields.length]);
 
   return (
-    <Container>
+    <Container className="w-full">
       <Heading variant="h1">{title}</Heading>
       <Form methods={formMethods} onSubmit={onSave} submitLabel={submitLabel}>
         <div className="flex flex-col gap-4">

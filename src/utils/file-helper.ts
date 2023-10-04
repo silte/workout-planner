@@ -3,10 +3,8 @@ import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 export const TEMPLATE_FILENAME_EXTENSION = '.workout-planner.json';
 
 export const useHandleFileUpload = <DataType = any>() => {
-  const [uploadedUserData, setUploadedUserData] = useState<DataType | null>(
-    null,
-  );
-  const [overrideFilename, setOverrideFilename] = useState<string | null>(null);
+  const [uploadedData, setUploadedData] = useState<DataType | null>(null);
+  const [filename, setFilename] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = useCallback(
@@ -14,8 +12,8 @@ export const useHandleFileUpload = <DataType = any>() => {
       const { files } = changeEvent.target;
       const targetFile = files?.item(0);
       if (!targetFile) {
-        setOverrideFilename(null);
-        setUploadedUserData(null);
+        setFilename(null);
+        setUploadedData(null);
         setError('Tiedoston lataaminen epäonnistui');
         return;
       }
@@ -27,8 +25,8 @@ export const useHandleFileUpload = <DataType = any>() => {
           typeof readerEvent?.target?.result === 'string'
         ) {
           const result = JSON.parse(readerEvent.target.result);
-          setUploadedUserData(result);
-          setOverrideFilename(targetFile.name);
+          setUploadedData(result);
+          setFilename(targetFile.name);
         } else {
           setError('Tiedoston lataaminen epäonnistui');
         }
@@ -40,11 +38,11 @@ export const useHandleFileUpload = <DataType = any>() => {
 
   return useMemo(
     () => ({
-      uploadedUserData,
-      overrideFilename,
-      error,
       handleFileChange,
+      uploadedData,
+      filename,
+      error,
     }),
-    [error, handleFileChange, overrideFilename, uploadedUserData],
+    [error, handleFileChange, filename, uploadedData],
   );
 };

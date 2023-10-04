@@ -31,7 +31,7 @@ export const Form = <T extends FieldValues>({
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="pb-[83px] lg:pb-0"
+        className="pb-[calc(140px+env(safe-area-inset-bottom))] lg:pb-0"
         id={id}
       >
         {children}
