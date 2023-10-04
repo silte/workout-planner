@@ -29,8 +29,8 @@ export const WorkoutDetailsIntervalListRow = ({
       <td>{summary.formatted.duration}</td>
       <td>{summary.formatted.distance}</td>
       <td>{summary.formatted.ascent}</td>
-      <td>{angle.toFixed(1)}</td>
-      <td>{speed.toFixed(1)}</td>
+      <td>{angle?.toFixed(1)}</td>
+      <td>{speed?.toFixed(1)}</td>
     </tr>
   );
 };

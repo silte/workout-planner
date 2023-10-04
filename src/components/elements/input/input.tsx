@@ -162,8 +162,8 @@ export const AngleInput = ({
       onChange={(event: ChangeEvent<HTMLInputElement>) => {
         field.onChange(
           unit === AngleUnit.DEGREES
-            ? event.target.value
-            : convertPercentToDegrees(parseInt(event.target.value)),
+            ? parseFloat(event.target.value)
+            : convertPercentToDegrees(parseFloat(event.target.value)),
         );
         field.onBlur();
       }}
@@ -200,8 +200,8 @@ export const SpeedInput = ({
       onChange={(event: ChangeEvent<HTMLInputElement>) => {
         field.onChange(
           unit === SpeedUnit.KMH
-            ? event.target.value
-            : convertMinkmToKmh(parseInt(event.target.value)),
+            ? parseFloat(event.target.value)
+            : convertMinkmToKmh(parseFloat(event.target.value)),
         );
         field.onBlur();
       }}

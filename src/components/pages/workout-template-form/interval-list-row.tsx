@@ -39,8 +39,8 @@ export const IntervalListRow = ({
     <tr>
       <td>{field.name}</td>
       <td>{summary.formatted.duration}</td>
-      <td>{angle.toFixed(1)}</td>
-      <td>{speed.toFixed(1)}</td>
+      <td>{angle?.toFixed(1)}</td>
+      <td>{speed?.toFixed(1)}</td>
       <td>
         <Button onClick={onEdit} className="mr-2">
           <Icon type={IconName.pencil} />

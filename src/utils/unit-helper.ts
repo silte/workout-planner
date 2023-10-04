@@ -11,7 +11,7 @@ export const timeFormatter = (seconds: number): string => {
 
 export const distanceFormatter = (meters: number): string => {
   if (meters > 1000) {
-    return `${(meters / 1000).toFixed(2)} km`;
+    return `${(meters / 1000)?.toFixed(2)} km`;
   }
-  return `${meters.toFixed(1)} m`;
+  return `${meters?.toFixed(1)} m`;
 };
