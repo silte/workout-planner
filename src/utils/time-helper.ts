@@ -15,3 +15,18 @@ export const timeToSeconds = (time: string | number): number => {
 
   return hours * 3600 + minutes * 60 + seconds;
 };
+
+export const getTimeString = () => {
+  const addLeadingZero = (number: number) => number.toString().padStart(2, '0');
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = addLeadingZero(now.getMonth() + 1);
+  const day = addLeadingZero(now.getDate());
+
+  const hours = addLeadingZero(now.getHours());
+  const minutes = addLeadingZero(now.getMinutes());
+  const seconds = addLeadingZero(now.getSeconds());
+
+  return `${year}${month}${day}-${hours}${minutes}${seconds}`;
+};

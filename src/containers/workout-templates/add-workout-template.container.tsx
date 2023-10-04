@@ -8,9 +8,15 @@ import {
   WorkoutTemplateForm,
   WorkoutTemplateFormValues,
 } from '$pages/workout-template-form/workout-template-form';
-import { AngleUnit, SpeedUnit } from '$types/workout';
+import { AngleUnit, SpeedUnit, WorkoutTemplate } from '$types/workout';
 
-export const AddWorkoutContainer = () => {
+type AddWorkoutContainerProps = {
+  importData?: WorkoutTemplate;
+};
+
+export const AddWorkoutContainer = ({
+  importData,
+}: AddWorkoutContainerProps) => {
   const { push } = useRouter();
 
   const [, setWorkoutTemplates] = useWorkoutTemplates();
@@ -32,14 +38,15 @@ export const AddWorkoutContainer = () => {
   );
 
   const initialValues = useMemo<WorkoutTemplateFormValues>(
-    () => ({
-      id: crypto.randomUUID(),
-      name: '',
-      intervals: [],
-      speedUnit: SpeedUnit.KMH,
-      angleUnit: AngleUnit.DEGREES,
-    }),
-    [],
+    () =>
+      importData ?? {
+        id: crypto.randomUUID(),
+        name: '',
+        intervals: [],
+        speedUnit: SpeedUnit.KMH,
+        angleUnit: AngleUnit.DEGREES,
+      },
+    [importData],
   );
 
   return (

@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { notFound, useRouter } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { DialogConfirm } from '$elements/dialog/confirm/dialog.confirm';
 import { Dialog } from '$elements/dialog/dialog';
@@ -18,7 +18,9 @@ import {
 } from '$hooks/useWorkoutTemplates';
 import { Container } from '$layouts/container/container';
 import { WorkoutDetailsIntervalListRow } from '$pages/workout-details/workout-details.interval-list-row';
+import { TEMPLATE_FILENAME_EXTENSION } from '$utils/file-helper';
 import { calculateIntervalsTotalSummary } from '$utils/interval-helper';
+import { getTimeString } from '$utils/time-helper';
 
 interface IAccountDeleteModalProps {
   onDelete: () => void;
@@ -83,6 +85,11 @@ export const WorkoutTemplateDetailsContainer = ({
 
   const { formatted } = calculateIntervalsTotalSummary(intervals);
 
+  const dataFile = useMemo(
+    () => new Blob([JSON.stringify(template ?? {})], { type: 'text/plain' }),
+    [template],
+  );
+
   return (
     <Container>
       <Heading variant="h1" className="mb-12">
@@ -109,6 +116,14 @@ export const WorkoutTemplateDetailsContainer = ({
             Muokkaa
           </LinkListLink>
           <WorkoutTemplateDeleteModal onDelete={onDelete} />
+          <LinkListLink
+            icon={IconName.download}
+            download={`${name}_${getTimeString()}${TEMPLATE_FILENAME_EXTENSION}`}
+            link={window.URL.createObjectURL(dataFile)}
+            testId="download-workout-template"
+          >
+            Lataa
+          </LinkListLink>
         </LinkList>
       </section>
       <table className="w-full text-left">

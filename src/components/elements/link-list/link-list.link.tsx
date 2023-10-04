@@ -11,6 +11,7 @@ interface LinkListLinkProps {
   testId?: string;
   entityTitle?: string;
   className?: string;
+  download?: string;
 }
 
 export const LinkListLink = ({
@@ -20,6 +21,7 @@ export const LinkListLink = ({
   testId,
   className = '',
   entityTitle,
+  download,
 }: LinkListLinkProps): JSX.Element => {
   const linkClasses = clsx(
     'relative flex gap-4 items-center focus-within:bg-gray-200 hover:bg-gray-200 overflow-hidden pl-4 lg:rounded-md',
@@ -54,6 +56,7 @@ export const LinkListLink = ({
         <a
           href={link}
           className={linkClasses}
+          download={download}
           data-testid={testId}
           data-entity-title={entityTitle ?? undefined}
         >
