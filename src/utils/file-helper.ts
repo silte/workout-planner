@@ -1,6 +1,7 @@
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
-export const TEMPLATE_FILENAME_EXTENSION = '.workout-planner.json';
+export const TEMPLATE_FILENAME_EXTENSION = '.template.workout-planner.json';
+export const ATHLETE_FILENAME_EXTENSION = '.athlete.workout-planner.json';
 
 export const useHandleFileUpload = <DataType = any>() => {
   const [uploadedData, setUploadedData] = useState<DataType | null>(null);
