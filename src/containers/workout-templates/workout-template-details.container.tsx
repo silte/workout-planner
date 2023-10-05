@@ -86,9 +86,30 @@ export const WorkoutTemplateDetailsContainer = ({
   const { formatted } = calculateIntervalsTotalSummary(intervals);
 
   const dataFile = useMemo(
-    () => new Blob([JSON.stringify(template ?? {})], { type: 'text/plain' }),
-    [template],
+    () =>
+      new File(
+        [JSON.stringify(template ?? {})],
+        `${name}_${getTimeString()}${TEMPLATE_FILENAME_EXTENSION}`,
+        { type: 'text/plain' },
+      ),
+    [template, name],
   );
+
+  const shareData = useMemo(() => {
+    const data = {
+      title: name,
+      text: 'Suunniteltu harjoitus',
+      files: [dataFile],
+    };
+
+    console.log(data, navigator.canShare(data));
+
+    if (!navigator.canShare(data)) {
+      return undefined;
+    }
+
+    return data;
+  }, [dataFile, name]);
 
   return (
     <Container>
@@ -118,12 +139,20 @@ export const WorkoutTemplateDetailsContainer = ({
           <WorkoutTemplateDeleteModal onDelete={onDelete} />
           <LinkListLink
             icon={IconName.download}
-            download={`${name}_${getTimeString()}${TEMPLATE_FILENAME_EXTENSION}`}
+            download={dataFile.name}
             link={window.URL.createObjectURL(dataFile)}
             testId="download-workout-template"
           >
             Lataa
           </LinkListLink>
+          {shareData && (
+            <LinkListButton
+              handleClick={() => navigator.share(shareData)}
+              icon={IconName.switchHorizontal}
+            >
+              Jaa
+            </LinkListButton>
+          )}
         </LinkList>
       </section>
       <table className="w-full text-left">
