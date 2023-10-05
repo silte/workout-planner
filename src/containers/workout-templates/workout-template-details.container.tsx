@@ -145,7 +145,7 @@ export const WorkoutTemplateDetailsContainer = ({
           >
             Lataa
           </LinkListLink>
-          {shareData && (
+          {shareData && false && (
             <LinkListButton
               handleClick={() => navigator.share(shareData)}
               icon={IconName.switchHorizontal}
