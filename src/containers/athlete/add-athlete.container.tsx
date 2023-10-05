@@ -3,47 +3,44 @@
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
-import { useWorkoutTemplates } from '$hooks/useWorkoutTemplates';
+import { useAthletes } from '$hooks/useAthletes';
 import { Container } from '$layouts/container/container';
 import {
-  WorkoutTemplateForm,
-  WorkoutTemplateFormValues,
-} from '$pages/workout-template-form/workout-template-form';
-import { AngleUnit, SpeedUnit } from '$types/workout';
-import { TEMPLATE_FILENAME_EXTENSION } from '$utils/file-helper';
+  AthleteForm,
+  AthleteFormValues,
+} from '$pages/athlete-form/athlete-form';
+import { ATHLETE_FILENAME_EXTENSION } from '$utils/file-helper';
 import { useHandleFileUpload } from '$utils/file-helper';
 
-export const AddWorkoutContainer = () => {
+export const AddAthleteContainer = () => {
   const { uploadedData, handleFileChange, filename } = useHandleFileUpload();
 
   const { push } = useRouter();
 
-  const [, setWorkoutTemplates] = useWorkoutTemplates();
+  const [, setAthlete] = useAthletes();
 
   const onSave = useCallback(
-    (values: WorkoutTemplateFormValues) => {
+    (values: AthleteFormValues) => {
       const formattedValues = {
         ...values,
-        intervals: values.intervals.map((interval, index) => ({
-          ...interval,
+        hrZones: values.hrZones.map((hrZone, index) => ({
+          ...hrZone,
           index,
         })),
       };
 
-      setWorkoutTemplates((prev) => [...prev, formattedValues]);
-      push('/harjoitukset/suunnitelmat');
+      setAthlete((prev) => [...prev, formattedValues]);
+      push('/harjoitukset/urheilijat');
     },
-    [push, setWorkoutTemplates],
+    [push, setAthlete],
   );
 
-  const initialValues = useMemo<WorkoutTemplateFormValues>(
+  const initialValues = useMemo<AthleteFormValues>(
     () =>
       uploadedData ?? {
         id: crypto.randomUUID(),
         name: '',
-        intervals: [],
-        speedUnit: SpeedUnit.KMH,
-        angleUnit: AngleUnit.DEGREES,
+        hrZones: [],
       },
     [uploadedData],
   );
@@ -61,17 +58,17 @@ export const AddWorkoutContainer = () => {
             type="file"
             id="selectFiles"
             onChange={handleFileChange}
-            accept={TEMPLATE_FILENAME_EXTENSION}
+            accept={ATHLETE_FILENAME_EXTENSION}
           />
         </label>
         <span className="ml-2">{filename || 'Ei tiedostoa valittuna'}</span>
       </Container>
 
-      <WorkoutTemplateForm
+      <AthleteForm
         key={JSON.stringify(initialValues)}
         initialValues={initialValues}
         onSave={onSave}
-        title="Lisää suunniteltu harjoitus"
+        title="Lisää urheilija"
         submitLabel="Tallenna"
       />
     </div>

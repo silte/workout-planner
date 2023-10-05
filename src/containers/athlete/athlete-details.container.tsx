@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { notFound, useRouter } from 'next/navigation';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -8,27 +7,20 @@ import { DialogConfirm } from '$elements/dialog/confirm/dialog.confirm';
 import { Dialog } from '$elements/dialog/dialog';
 import { Heading } from '$elements/heading/heading';
 import { IconName } from '$elements/icon/icon';
-import { InfoCard } from '$elements/info-card/info-card';
 import { LinkList } from '$elements/link-list/link-list';
 import { LinkListButton } from '$elements/link-list/link-list.button';
 import { LinkListLink } from '$elements/link-list/link-list.link';
-import {
-  useDeleteWorkoutTemplate,
-  useWorkoutTemplate,
-} from '$hooks/useWorkoutTemplates';
+import { useAthlete, useDeleteAthlete } from '$hooks/useAthletes';
 import { Container } from '$layouts/container/container';
-import { WorkoutDetailsIntervalListRow } from '$pages/workout-details/workout-details.interval-list-row';
-import { TEMPLATE_FILENAME_EXTENSION } from '$utils/file-helper';
-import { calculateIntervalsTotalSummary } from '$utils/interval-helper';
+import { AthleteDetailsHrZoneListRow } from '$pages/athlete-form/athlete-details.hr-zone-list-row';
+import { ATHLETE_FILENAME_EXTENSION } from '$utils/file-helper';
 import { getTimeString } from '$utils/time-helper';
 
 interface IAccountDeleteModalProps {
   onDelete: () => void;
 }
 
-export const WorkoutTemplateDeleteModal = ({
-  onDelete,
-}: IAccountDeleteModalProps) => {
+export const AthleteDeleteModal = ({ onDelete }: IAccountDeleteModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleOpen = () => setIsOpen(!isOpen);
@@ -38,7 +30,7 @@ export const WorkoutTemplateDeleteModal = ({
       <LinkListButton
         icon={IconName.trash}
         handleClick={handleToggleOpen}
-        testId="delete-workout-template"
+        testId="delete-athelete"
       >
         Poista
       </LinkListButton>
@@ -46,53 +38,50 @@ export const WorkoutTemplateDeleteModal = ({
         <DialogConfirm
           onConfirm={onDelete}
           onCancel={handleToggleOpen}
-          label="Poista suunniteltu harjoitus"
+          label="Poista urheilija"
           submitButtonLabel="Poista"
           iconName={IconName.exclamation}
-          testId="delete-workout-template-confirm"
+          testId="delete-athelete-confirm"
         >
-          Haluatko varmasti poistaa suunnitellun harjoituksen? Tätä ei voi
-          peruuttaa.
+          Haluatko varmasti poistaa urheilijan? Tätä ei voi peruuttaa.
         </DialogConfirm>
       </Dialog>
     </>
   );
 };
 
-type WorkoutTemplateDetailsContainerProps = {
+type AthleteDetailsContainerProps = {
   id: string;
 };
 
-export const WorkoutTemplateDetailsContainer = ({
+export const AthleteDetailsContainer = ({
   id,
-}: WorkoutTemplateDetailsContainerProps) => {
+}: AthleteDetailsContainerProps) => {
   const { push } = useRouter();
 
-  const template = useWorkoutTemplate(id);
+  const athlete = useAthlete(id);
 
-  const handleDelete = useDeleteWorkoutTemplate();
+  const handleDelete = useDeleteAthlete();
 
-  if (!template) {
+  if (!athlete) {
     notFound();
   }
 
   const onDelete = useCallback(() => {
     handleDelete(id);
-    push('/harjoitukset/suunnitelmat');
+    push('/harjoitukset/urheilijat');
   }, [handleDelete, id, push]);
 
-  const { name, intervals, speedUnit, angleUnit } = template;
-
-  const { formatted } = calculateIntervalsTotalSummary(intervals);
+  const { name, hrZones } = athlete;
 
   const dataFile = useMemo(
     () =>
       new File(
-        [JSON.stringify(template ?? {})],
-        `${name}_${getTimeString()}${TEMPLATE_FILENAME_EXTENSION}`,
+        [JSON.stringify(athlete ?? {})],
+        `${name}_${getTimeString()}${ATHLETE_FILENAME_EXTENSION}`,
         { type: 'text/plain' },
       ),
-    [template, name],
+    [athlete, name],
   );
 
   const shareData = useMemo(() => {
@@ -117,31 +106,20 @@ export const WorkoutTemplateDetailsContainer = ({
         {name}
       </Heading>
       <section className={'mb-6 grid md:grid-cols-2 gap-4 md:gap-6'}>
-        <section className={clsx('grid gap-2')}>
-          <InfoCard label="Kesto" testId="workout-template-duration" isLarge>
-            {formatted.duration}
-          </InfoCard>
-          <InfoCard label="Matka" testId="workout-template-distance" isSmall>
-            {formatted.distance}
-          </InfoCard>
-          <InfoCard label="Nousu" testId="workout-template-ascent" isSmall>
-            {formatted.ascent}
-          </InfoCard>
-        </section>
         <LinkList isVertical>
           <LinkListLink
-            link={`/harjoitukset/suunnitelmat/${id}/muokkaa`}
-            testId="edit-workout-template"
+            link={`/harjoitukset/urheilijat/${id}/muokkaa`}
+            testId="edit-athelete"
             icon={IconName.cog}
           >
             Muokkaa
           </LinkListLink>
-          <WorkoutTemplateDeleteModal onDelete={onDelete} />
+          <AthleteDeleteModal onDelete={onDelete} />
           <LinkListLink
             icon={IconName.download}
             download={dataFile.name}
             link={window.URL.createObjectURL(dataFile)}
-            testId="download-workout-template"
+            testId="download-athelete"
           >
             Lataa
           </LinkListLink>
@@ -154,29 +132,22 @@ export const WorkoutTemplateDetailsContainer = ({
             </LinkListButton>
           )}
         </LinkList>
+        <div className="md:col-start-1 md:row-start-1 md:col-span-1">
+          <table className="w-full text-left">
+            <thead>
+              <tr>
+                <th>Nimi</th>
+                <th>Syke</th>
+              </tr>
+            </thead>
+            <tbody>
+              {hrZones.map((hrZone) => (
+                <AthleteDetailsHrZoneListRow key={hrZone.id} {...hrZone} />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
-      <table className="w-full text-left">
-        <thead>
-          <tr>
-            <th>Nimi</th>
-            <th>Kesto</th>
-            <th>Matka</th>
-            <th>Nousu</th>
-            <th>Kulma ({angleUnit})</th>
-            <th>Nopeus ({speedUnit})</th>
-          </tr>
-        </thead>
-        <tbody>
-          {template.intervals.map((interval) => (
-            <WorkoutDetailsIntervalListRow
-              key={interval.id}
-              {...interval}
-              speedUnit={speedUnit}
-              angleUnit={angleUnit}
-            />
-          ))}
-        </tbody>
-      </table>
     </Container>
   );
 };

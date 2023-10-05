@@ -3,6 +3,7 @@ import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 export const TEMPLATE_FILENAME_EXTENSION = '.template.workout-planner.json';
 export const ATHLETE_FILENAME_EXTENSION = '.athlete.workout-planner.json';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useHandleFileUpload = <DataType = any>() => {
   const [uploadedData, setUploadedData] = useState<DataType | null>(null);
   const [filename, setFilename] = useState<string | null>(null);
