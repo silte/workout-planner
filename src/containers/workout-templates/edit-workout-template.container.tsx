@@ -11,6 +11,7 @@ import {
   WorkoutTemplateForm,
   WorkoutTemplateFormValues,
 } from '$pages/workout-template-form/workout-template-form';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 type EditWorkoutTemplateContainerProps = {
   id: string;
@@ -49,11 +50,16 @@ export const EditWorkoutTemplateContainer = ({
   );
 
   return (
-    <WorkoutTemplateForm
-      initialValues={template}
-      onSave={onSave}
-      title={`Muokkaa suunniteltu harjoitus - ${template.name}`}
-      submitLabel="Tallenna"
-    />
+    <>
+      <UpdatePageInfo
+        title={`Muokkaa suunniteltu harjoitus - ${template.name}`}
+        backLink={`/suunnitelmat/${template.id}`}
+      />
+      <WorkoutTemplateForm
+        initialValues={template}
+        onSave={onSave}
+        submitLabel="Tallenna"
+      />
+    </>
   );
 };

@@ -5,7 +5,6 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { DialogConfirm } from '$elements/dialog/confirm/dialog.confirm';
 import { Dialog } from '$elements/dialog/dialog';
-import { Heading } from '$elements/heading/heading';
 import { IconName } from '$elements/icon/icon';
 import { LinkList } from '$elements/link-list/link-list';
 import { LinkListButton } from '$elements/link-list/link-list.button';
@@ -15,6 +14,7 @@ import { Container } from '$layouts/container/container';
 import { AthleteDetailsHrZoneListRow } from '$pages/athlete-form/athlete-details.hr-zone-list-row';
 import { ATHLETE_FILENAME_EXTENSION } from '$utils/file-helper';
 import { getTimeString } from '$utils/time-helper';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 interface IAccountDeleteModalProps {
   onDelete: () => void;
@@ -102,9 +102,7 @@ export const AthleteDetailsContainer = ({
 
   return (
     <Container>
-      <Heading variant="h1" className="mb-12">
-        {name}
-      </Heading>
+      <UpdatePageInfo title={name} backLink="/urheilijat" />
       <section className={'mb-6 grid md:grid-cols-2 gap-4 md:gap-6'}>
         <LinkList isVertical>
           <LinkListLink

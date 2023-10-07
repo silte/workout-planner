@@ -2,10 +2,10 @@
 
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Heading } from '$elements/heading/heading';
 import { Input } from '$elements/input/input';
 import { Container } from '$layouts/container/container';
 import { convertKmhToMinkm, convertMinkmToKmh } from '$utils/speed-helper';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 type SpeedConverterValues = {
   kmh: number;
@@ -25,7 +25,7 @@ export const SpeedConverter = () => {
 
   return (
     <Container className="flex flex-col items-center gap-4">
-      <Heading variant="h1">Nopeus muunnin</Heading>
+      <UpdatePageInfo title="Nopeus muunnin" backLink="/muuntimet" />
       <FormProvider {...methods}>
         <div>
           <Input id="kmh" type="number">

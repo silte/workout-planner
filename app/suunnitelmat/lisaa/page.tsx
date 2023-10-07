@@ -1,5 +1,5 @@
-import { AddWorkoutContainer } from '$containers/workout-templates/add-workout-template.container';
+import { AddWorkoutTemplateContainer } from '$containers/workout-templates/add-workout-template.container';
 
 export default function AddWorkoutPage() {
-  return <AddWorkoutContainer />;
+  return <AddWorkoutTemplateContainer />;
 }

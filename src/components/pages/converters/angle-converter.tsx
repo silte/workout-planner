@@ -2,13 +2,13 @@
 
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Heading } from '$elements/heading/heading';
 import { Input } from '$elements/input/input';
 import { Container } from '$layouts/container/container';
 import {
   convertDegreesToPercent,
   convertPercentToDegrees,
 } from '$utils/angle-helper';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 type AngleConverterValues = {
   degrees: number;
@@ -28,7 +28,7 @@ export const AngleConverter = () => {
 
   return (
     <Container className="flex flex-col items-center gap-4">
-      <Heading variant="h1">Kulma muunnin</Heading>
+      <UpdatePageInfo title="Kulma muunnin" backLink="/muuntimet" />
       <FormProvider {...methods}>
         <div>
           <Input id="degrees" type="number">

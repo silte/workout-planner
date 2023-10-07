@@ -12,8 +12,9 @@ import {
 import { AngleUnit, SpeedUnit } from '$types/workout';
 import { TEMPLATE_FILENAME_EXTENSION } from '$utils/file-helper';
 import { useHandleFileUpload } from '$utils/file-helper';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
-export const AddWorkoutContainer = () => {
+export const AddWorkoutTemplateContainer = () => {
   const { uploadedData, handleFileChange, filename } = useHandleFileUpload();
 
   const { push } = useRouter();
@@ -50,6 +51,10 @@ export const AddWorkoutContainer = () => {
 
   return (
     <div className="flex flex-col gap-6 my-2">
+      <UpdatePageInfo
+        title="Lisää suunniteltu harjoitus"
+        backLink="/suunnitelmat"
+      />
       <Container className="w-full">
         <label
           htmlFor="selectFiles"
@@ -71,7 +76,6 @@ export const AddWorkoutContainer = () => {
         key={JSON.stringify(initialValues)}
         initialValues={initialValues}
         onSave={onSave}
-        title="Lisää suunniteltu harjoitus"
         submitLabel="Tallenna"
       />
     </div>

@@ -8,7 +8,6 @@ import { IntervalListHeader } from './interval-list-header';
 
 import { Form } from '$blocks/form/form';
 import { Button } from '$elements/button/button';
-import { Heading } from '$elements/heading/heading';
 import { InfoCard } from '$elements/info-card/info-card';
 import { Input } from '$elements/input/input';
 import { Select } from '$elements/select/select';
@@ -74,7 +73,6 @@ const angleUnitOptions = [
 type WorkoutTemplateFormProps = {
   initialValues: WorkoutTemplate;
   onSave: (values: WorkoutTemplateFormValues) => void;
-  title: string;
   submitLabel: string;
 };
 
@@ -83,7 +81,6 @@ export type WorkoutTemplateFormValues = WorkoutTemplate;
 export const WorkoutTemplateForm = ({
   initialValues,
   onSave,
-  title,
   submitLabel,
 }: WorkoutTemplateFormProps) => {
   const [intervalToEdit, setIntervalToEdit] = useState<number>(NaN);
@@ -112,7 +109,6 @@ export const WorkoutTemplateForm = ({
 
   return (
     <Container className="w-full">
-      <Heading variant="h1">{title}</Heading>
       <Form methods={formMethods} onSubmit={onSave} submitLabel={submitLabel}>
         <div className="flex flex-col gap-4">
           <Input id="name" isRequired>

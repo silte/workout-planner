@@ -6,7 +6,6 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { DialogConfirm } from '$elements/dialog/confirm/dialog.confirm';
 import { Dialog } from '$elements/dialog/dialog';
-import { Heading } from '$elements/heading/heading';
 import { IconName } from '$elements/icon/icon';
 import { InfoCard } from '$elements/info-card/info-card';
 import { LinkList } from '$elements/link-list/link-list';
@@ -21,6 +20,7 @@ import { WorkoutDetailsIntervalListRow } from '$pages/workout-details/workout-de
 import { TEMPLATE_FILENAME_EXTENSION } from '$utils/file-helper';
 import { calculateIntervalsTotalSummary } from '$utils/interval-helper';
 import { getTimeString } from '$utils/time-helper';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 interface IAccountDeleteModalProps {
   onDelete: () => void;
@@ -113,9 +113,7 @@ export const WorkoutTemplateDetailsContainer = ({
 
   return (
     <Container>
-      <Heading variant="h1" className="mb-12">
-        {name}
-      </Heading>
+      <UpdatePageInfo title={name} backLink="/suunnitelmat" />
       <section className={'mb-6 grid md:grid-cols-2 gap-4 md:gap-6'}>
         <section className={clsx('grid gap-2')}>
           <InfoCard label="Kesto" testId="workout-template-duration" isLarge>

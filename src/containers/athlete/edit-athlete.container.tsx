@@ -8,6 +8,7 @@ import {
   AthleteForm,
   AthleteFormValues,
 } from '$pages/athlete-form/athlete-form';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 type EditAthleteContainerProps = {
   id: string;
@@ -44,11 +45,16 @@ export const EditAthleteContainer = ({ id }: EditAthleteContainerProps) => {
   );
 
   return (
-    <AthleteForm
-      initialValues={athlete}
-      onSave={onSave}
-      title={`Muokkaa urheilijaa - ${athlete.name}`}
-      submitLabel="Tallenna"
-    />
+    <>
+      <UpdatePageInfo
+        title={`Muokkaa urheilijaa - ${athlete.name}`}
+        backLink={`/urheilijat/${athlete.id}`}
+      />
+      <AthleteForm
+        initialValues={athlete}
+        onSave={onSave}
+        submitLabel="Tallenna"
+      />
+    </>
   );
 };

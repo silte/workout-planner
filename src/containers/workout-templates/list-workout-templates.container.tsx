@@ -1,25 +1,25 @@
 'use client';
 
-import { Heading } from '$elements/heading/heading';
 import { LinkList } from '$elements/link-list/link-list';
 import { LinkListLink } from '$elements/link-list/link-list.link';
 import { useWorkoutTemplates } from '$hooks/useWorkoutTemplates';
 import { Container } from '$layouts/container/container';
 import { calculateIntervalsTotalSummary } from '$utils/interval-helper';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 export const ListWorkoutTemplatesContainer = () => {
   const [workoutTemplates] = useWorkoutTemplates();
 
   return (
     <Container>
-      <Heading variant="h1">Harjoitukset</Heading>
+      <UpdatePageInfo title="Suunnitellut harjoitukset" />
       <LinkList>
         <LinkListLink link="/suunnitelmat/lisaa">
           Lisää suunniteltu harjoitus
         </LinkListLink>
       </LinkList>
       <LinkList
-        label={'Suunnitellut harjoitukset'}
+        label={'Tallennetut suunnitelmat'}
         className={`mt-12`}
         testId="workout-template-list"
       >

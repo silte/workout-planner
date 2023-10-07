@@ -9,7 +9,6 @@ import { HrZoneListRow } from './hr-zone-list-row';
 
 import { Form } from '$blocks/form/form';
 import { Button } from '$elements/button/button';
-import { Heading } from '$elements/heading/heading';
 import { Input } from '$elements/input/input';
 import { Container } from '$layouts/container/container';
 import { Athlete } from '$types/athelete';
@@ -17,7 +16,6 @@ import { Athlete } from '$types/athelete';
 type AthleteFormProps = {
   initialValues: Athlete;
   onSave: (values: AthleteFormValues) => void;
-  title: string;
   submitLabel: string;
 };
 
@@ -26,7 +24,6 @@ export type AthleteFormValues = Athlete;
 export const AthleteForm = ({
   initialValues,
   onSave,
-  title,
   submitLabel,
 }: AthleteFormProps) => {
   const [hrZoneToEdit, setHrZoneToEdit] = useState<number>(NaN);
@@ -52,7 +49,6 @@ export const AthleteForm = ({
 
   return (
     <Container className="w-full">
-      <Heading variant="h1">{title}</Heading>
       <Form methods={formMethods} onSubmit={onSave} submitLabel={submitLabel}>
         <div className="flex flex-col gap-4">
           <Input id="name" isRequired>

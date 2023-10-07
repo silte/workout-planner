@@ -11,6 +11,7 @@ import {
 } from '$pages/athlete-form/athlete-form';
 import { ATHLETE_FILENAME_EXTENSION } from '$utils/file-helper';
 import { useHandleFileUpload } from '$utils/file-helper';
+import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 export const AddAthleteContainer = () => {
   const { uploadedData, handleFileChange, filename } = useHandleFileUpload();
@@ -47,6 +48,7 @@ export const AddAthleteContainer = () => {
 
   return (
     <div className="flex flex-col gap-6 my-2">
+      <UpdatePageInfo title="Lisää urheilija" backLink="/urheilijat" />
       <Container className="w-full">
         <label
           htmlFor="selectFiles"
@@ -68,7 +70,6 @@ export const AddAthleteContainer = () => {
         key={JSON.stringify(initialValues)}
         initialValues={initialValues}
         onSave={onSave}
-        title="Lisää urheilija"
         submitLabel="Tallenna"
       />
     </div>
