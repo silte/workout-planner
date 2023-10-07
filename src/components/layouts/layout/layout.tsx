@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 import { DesktopNavigation } from '$blocks/desktop-navigation/desktop-navigation';
 import { MobileNavigation } from '$blocks/mobile-navigation/mobile-navigation';
+import { LinkViewTransition } from '$elements/link/link-view-transition';
 import { Container } from '$layouts/container/container';
 import { DesktopHeader } from '$layouts/desktop-header/desktop-header';
 import { MobileHeader } from '$layouts/mobile-header/mobile-header';
@@ -54,7 +54,10 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
           <aside className="after:bg-gray after:ml-[-100vw] after:pr-[100vw] after:absolute after:top-0 after:bottom-0 after:right-0 relative border-r border-gray-200 vt-name-[desktop-navigation]">
             <div className="sticky top-0 z-10 min-h-screen pt-12 pb-12 pl-8 pr-4 bottom-12">
               <header>
-                <Link href="/" className="inline-flex items-center gap-3 mb-8">
+                <LinkViewTransition
+                  href="/"
+                  className="inline-flex items-center gap-3 mb-8"
+                >
                   {/* <Image
                     src="/logo.svg"
                     alt="Workout planner logo"
@@ -66,7 +69,7 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
                   <h2 className="text-xl font-extrabold tracking-tighter text-black uppercase">
                     Workout planner
                   </h2>
-                </Link>
+                </LinkViewTransition>
                 <DesktopNavigation />
               </header>
             </div>

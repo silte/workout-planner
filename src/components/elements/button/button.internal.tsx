@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { LinkViewTransition } from '$elements/link/link-view-transition';
 
 interface ButtonInternalProps {
   children: React.ReactNode;
@@ -16,13 +16,13 @@ export const ButtonInternal = ({
   testId,
 }: ButtonInternalProps): JSX.Element => {
   return (
-    <Link
+    <LinkViewTransition
       href={link}
       className={className}
       onClick={onClick}
       data-testid={testId}
     >
       {children}
-    </Link>
+    </LinkViewTransition>
   );
 };

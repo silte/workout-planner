@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
-import Link from 'next/link';
 import { ReactNode } from 'react';
+
+import { LinkViewTransition } from '$elements/link/link-view-transition';
 
 type HeadingVariants = 'h1' | 'h2' | 'h3' | 'h4';
 
@@ -54,13 +55,13 @@ export const Heading = ({
         {children}
       </HeadingType>
       {ctaUrl && ctaLabel && (
-        <Link
+        <LinkViewTransition
           href={ctaUrl}
           className="flex-shrink-0 font-medium tracking-tight text-gray-800 hover:underline"
           data-entity-title={ctaEntityTitle ?? undefined}
         >
           {ctaLabel}
-        </Link>
+        </LinkViewTransition>
       )}
     </section>
   );

@@ -2,12 +2,9 @@ import clsx from 'clsx';
 import { useRouter as useNextRouter, usePathname } from 'next/navigation';
 import { useLayoutEffect, useRef, useMemo } from 'react';
 
-// import { transitionHelper } from '$utils/transitionHelper';
+import { transitionHelper } from '$utils/transitionHelper';
 
 export type ViewTransition = false | 'open-from-right' | 'close-to-right';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-const transitionHelper = (arg: any) => {};
 
 export const useViewTransitionRouter = (
   transition?: ViewTransition,

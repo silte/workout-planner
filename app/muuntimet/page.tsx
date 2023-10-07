@@ -1,15 +1,18 @@
 'use client';
 
-import Link from 'next/link';
-
+import { LinkViewTransition } from '$elements/link/link-view-transition';
 import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 export default function Converters() {
   return (
     <div>
       <UpdatePageInfo title="Muuntimet" />
-      <Link href="/muuntimet/kulma">Kulma muunnin</Link>
-      <Link href="/muuntimet/nopeus">Nopeus muunnin</Link>
+      <LinkViewTransition href="/muuntimet/kulma">
+        Kulma muunnin
+      </LinkViewTransition>
+      <LinkViewTransition href="/muuntimet/nopeus">
+        Nopeus muunnin
+      </LinkViewTransition>
     </div>
   );
 }

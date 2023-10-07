@@ -3,6 +3,7 @@
 import { Inter } from 'next/font/google';
 
 import { PageInfoProvider } from '$containers/page-info.context';
+import { TransitionProvider } from '$containers/transition.provider';
 import { Layout } from '$layouts/layout/layout';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -27,7 +28,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <PageInfoProvider>
-          <Layout>{children}</Layout>
+          <TransitionProvider>
+            <Layout>{children}</Layout>
+          </TransitionProvider>
         </PageInfoProvider>
       </body>
     </html>

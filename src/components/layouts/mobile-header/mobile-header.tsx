@@ -1,9 +1,9 @@
 import { clsx } from 'clsx';
-import Link from 'next/link';
 
 import { usePageInfoContext } from '$containers/page-info.context';
 import { Heading } from '$elements/heading/heading';
 import { Icon, IconName } from '$elements/icon/icon';
+import { LinkViewTransition } from '$elements/link/link-view-transition';
 
 export const MobileHeader = (): JSX.Element => {
   const [{ title, backLink, headerAction, toolbarColor }] =
@@ -27,15 +27,15 @@ export const MobileHeader = (): JSX.Element => {
       )}
     >
       {backLink && (
-        <Link
+        <LinkViewTransition
           href={backLink}
           className="inline-flex items-center justify-center border border-gray-200 rounded-full h-11 w-11 bg-gray"
           data-testid="header-back-link"
-          // transition="close-to-right"
+          transition="close-to-right"
         >
           <span className="sr-only">Takaisin</span>
           <Icon type={IconName.chevronLeft} />
-        </Link>
+        </LinkViewTransition>
       )}
       <Heading
         variant="h1"
