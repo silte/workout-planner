@@ -27,20 +27,22 @@ export const AngleConverter = () => {
   const degreesInPercents = convertDegreesToPercent(methods.watch('degrees'));
 
   return (
-    <Container className="flex flex-col items-center gap-4">
+    <Container className="flex flex-col items-start gap-4">
       <UpdatePageInfo title="Kulma muunnin" backLink="/muuntimet" />
       <FormProvider {...methods}>
-        <div>
-          <Input id="degrees" type="number">
-            Astetta
-          </Input>
-          <p>prosenttia: {degreesInPercents.toFixed(2)}</p>
-        </div>
-        <div>
-          <Input id="percent" type="number">
-            Prosenttia
-          </Input>
-          <p>astetta: {percentInDegrees.toFixed(2)}</p>
+        <div className="w-full gap-8 grid md:grid-cols-2">
+          <div>
+            <Input id="degrees" type="number">
+              Astetta
+            </Input>
+            <p>prosenttia: {degreesInPercents.toFixed(2)}</p>
+          </div>
+          <div>
+            <Input id="percent" type="number">
+              Prosenttia
+            </Input>
+            <p>astetta: {percentInDegrees.toFixed(2)}</p>
+          </div>
         </div>
       </FormProvider>
     </Container>

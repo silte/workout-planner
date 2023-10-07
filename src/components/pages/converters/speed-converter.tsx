@@ -24,20 +24,22 @@ export const SpeedConverter = () => {
   const minkmInKmh = convertMinkmToKmh(methods.watch('minkm'));
 
   return (
-    <Container className="flex flex-col items-center gap-4">
+    <Container className="flex flex-col items-start gap-4">
       <UpdatePageInfo title="Nopeus muunnin" backLink="/muuntimet" />
       <FormProvider {...methods}>
-        <div>
-          <Input id="kmh" type="number">
-            km/h
-          </Input>
-          <p>min/km: {kmhInMinkm.toFixed(2)}</p>
-        </div>
-        <div>
-          <Input id="minkm" type="number">
-            min/km
-          </Input>
-          <p>km/h: {minkmInKmh.toFixed(2)}</p>
+        <div className="w-full gap-8 grid md:grid-cols-2">
+          <div>
+            <Input id="kmh" type="number">
+              km/h
+            </Input>
+            <p>min/km: {kmhInMinkm.toFixed(2)}</p>
+          </div>
+          <div>
+            <Input id="minkm" type="number">
+              min/km
+            </Input>
+            <p>km/h: {minkmInKmh.toFixed(2)}</p>
+          </div>
         </div>
       </FormProvider>
     </Container>
