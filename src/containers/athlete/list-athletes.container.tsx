@@ -13,15 +13,13 @@ export const ListAthletesContainer = () => {
     <Container>
       <Heading variant="h1">Urheilijat</Heading>
       <LinkList>
-        <LinkListLink link="/harjoitukset/urheilijat/lisaa">
-          Lisää urheilija
-        </LinkListLink>
+        <LinkListLink link="/urheilijat/lisaa">Lisää urheilija</LinkListLink>
       </LinkList>
       <LinkList label={'Urheilijat'} className={`mt-12`} testId="athele-list">
         {athletes.map(({ id, name }) => {
           return (
             <LinkListLink
-              link={`/harjoitukset/urheilijat/${id}`}
+              link={`/urheilijat/${id}`}
               testId="athele-row"
               key={id}
             >

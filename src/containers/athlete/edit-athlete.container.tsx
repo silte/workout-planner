@@ -38,7 +38,7 @@ export const EditAthleteContainer = ({ id }: EditAthleteContainerProps) => {
           item.id === formattedValues.id ? formattedValues : item,
         ),
       );
-      push(`/harjoitukset/urheilijat/${formattedValues.id}`);
+      push(`/urheilijat/${formattedValues.id}`);
     },
     [push, setAthletes],
   );

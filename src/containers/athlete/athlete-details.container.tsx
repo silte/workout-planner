@@ -69,7 +69,7 @@ export const AthleteDetailsContainer = ({
 
   const onDelete = useCallback(() => {
     handleDelete(id);
-    push('/harjoitukset/urheilijat');
+    push('/urheilijat');
   }, [handleDelete, id, push]);
 
   const { name, hrZones } = athlete;
@@ -108,7 +108,7 @@ export const AthleteDetailsContainer = ({
       <section className={'mb-6 grid md:grid-cols-2 gap-4 md:gap-6'}>
         <LinkList isVertical>
           <LinkListLink
-            link={`/harjoitukset/urheilijat/${id}/muokkaa`}
+            link={`/urheilijat/${id}/muokkaa`}
             testId="edit-athelete"
             icon={IconName.cog}
           >

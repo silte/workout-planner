@@ -43,7 +43,7 @@ export const EditWorkoutTemplateContainer = ({
           item.id === formattedValues.id ? formattedValues : item,
         ),
       );
-      push(`/harjoitukset/suunnitelmat/${formattedValues.id}`);
+      push(`/suunnitelmat/${formattedValues.id}`);
     },
     [push, setWorkoutTemplates],
   );

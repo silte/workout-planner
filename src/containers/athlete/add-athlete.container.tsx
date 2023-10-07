@@ -30,7 +30,7 @@ export const AddAthleteContainer = () => {
       };
 
       setAthlete((prev) => [...prev, formattedValues]);
-      push('/harjoitukset/urheilijat');
+      push('/urheilijat');
     },
     [push, setAthlete],
   );

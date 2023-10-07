@@ -78,7 +78,7 @@ export const WorkoutTemplateDetailsContainer = ({
 
   const onDelete = useCallback(() => {
     handleDelete(id);
-    push('/harjoitukset/suunnitelmat');
+    push('/suunnitelmat');
   }, [handleDelete, id, push]);
 
   const { name, intervals, speedUnit, angleUnit } = template;
@@ -130,7 +130,7 @@ export const WorkoutTemplateDetailsContainer = ({
         </section>
         <LinkList isVertical>
           <LinkListLink
-            link={`/harjoitukset/suunnitelmat/${id}/muokkaa`}
+            link={`/suunnitelmat/${id}/muokkaa`}
             testId="edit-workout-template"
             icon={IconName.cog}
           >

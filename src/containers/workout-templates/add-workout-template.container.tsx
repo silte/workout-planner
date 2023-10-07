@@ -31,7 +31,7 @@ export const AddWorkoutContainer = () => {
       };
 
       setWorkoutTemplates((prev) => [...prev, formattedValues]);
-      push('/harjoitukset/suunnitelmat');
+      push('/suunnitelmat');
     },
     [push, setWorkoutTemplates],
   );
