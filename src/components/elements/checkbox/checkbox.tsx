@@ -4,16 +4,10 @@ import { useFormContext } from 'react-hook-form';
 interface CheckboxProps {
   id: string;
   label: string;
-  name: string;
-  value: string;
+  value?: string;
 }
 
-export const Checkbox = ({
-  id,
-  label,
-  name,
-  value,
-}: CheckboxProps): JSX.Element => {
+export const Checkbox = ({ id, label, value }: CheckboxProps): JSX.Element => {
   const { register } = useFormContext();
 
   return (
@@ -29,7 +23,7 @@ export const Checkbox = ({
           type="checkbox"
           value={value}
           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-200 focus:ring-blue-600 focus:ring-2"
-          {...register(name)}
+          {...register(id)}
         />
       </div>
       <span className="text-base font-medium text-gray-800">{label}</span>

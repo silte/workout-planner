@@ -1,8 +1,13 @@
 import { useMemo } from 'react';
-import { useWatch } from 'react-hook-form';
+import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
+
+import { WorkoutFormValues } from './workout-form';
 
 import { Drawer } from '$blocks/drawer/drawer';
+import { Button } from '$elements/button/button';
+import { Checkbox } from '$elements/checkbox/checkbox';
 import { Heading } from '$elements/heading/heading';
+import { Icon, IconName } from '$elements/icon/icon';
 import {
   Input,
   TimeInput,
@@ -38,6 +43,35 @@ const EditIntervalSummary = ({ index }: EditIntervalSummaryProps) => {
   );
 };
 
+type HrRowProps = {
+  intervalIndex: number;
+  hrIndex: number;
+  onRemove: () => void;
+};
+
+const HrRow = ({ intervalIndex, hrIndex, onRemove }: HrRowProps) => {
+  const hasStartHr = useWatch({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    name: `intervals.${intervalIndex}.hasStartHr` as any,
+  }) as boolean;
+
+  const labelNumber = hasStartHr ? hrIndex : hrIndex + 1;
+
+  const label =
+    hasStartHr && hrIndex === 0 ? `Aloitus syke` : `Syke ${labelNumber}`;
+
+  return (
+    <div className="flex items-end justify-between gap-2">
+      <Input id={`intervals.${intervalIndex}.hr.${hrIndex}`}>{label}</Input>
+      <div>
+        <Button onClick={onRemove}>
+          <Icon type={IconName.trash} />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 type EditIntervalProps = {
   onClose: () => void;
   index: number;
@@ -46,8 +80,16 @@ type EditIntervalProps = {
 export const EditInterval = ({ onClose, index }: EditIntervalProps) => {
   const isOpen = !isNaN(index);
 
+  const { control } = useFormContext<WorkoutFormValues>();
+
   const speedUnit = useWatch({ name: 'speedUnit' }) as SpeedUnit;
   const angleUnit = useWatch({ name: 'angleUnit' }) as AngleUnit;
+
+  const { append, remove, fields } = useFieldArray({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    name: `intervals.${index}.hr` as any,
+    control,
+  });
 
   return (
     <Drawer onClose={onClose} isOpen={isOpen}>
@@ -63,6 +105,19 @@ export const EditInterval = ({ onClose, index }: EditIntervalProps) => {
         <SpeedInput id={`intervals.${index}.speed`} unit={speedUnit} step={0.1}>
           Nopeus
         </SpeedInput>
+        <Checkbox
+          id={`intervals.${index}.hasStartHr`}
+          label="Sisältää aloitus sykkeen"
+        />
+        <Button onClick={() => append(0)}>Lisää syke</Button>
+        {fields.map((item, hrIndex) => (
+          <HrRow
+            key={item.id}
+            intervalIndex={index}
+            hrIndex={hrIndex}
+            onRemove={() => remove(hrIndex)}
+          />
+        ))}
         <EditIntervalSummary index={index} />
       </div>
     </Drawer>
