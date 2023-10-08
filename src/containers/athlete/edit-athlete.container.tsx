@@ -47,7 +47,7 @@ export const EditAthleteContainer = ({ id }: EditAthleteContainerProps) => {
   return (
     <>
       <UpdatePageInfo
-        title={`Muokkaa urheilijaa - ${athlete.name}`}
+        title={`Muokkaa - ${athlete.name}`}
         backLink={`/urheilijat/${athlete.id}`}
       />
       <AthleteForm

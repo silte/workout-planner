@@ -3,26 +3,28 @@
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
-import { useWorkoutTemplates } from '$hooks/useWorkoutTemplates';
+import { useAthletes } from '$hooks/useAthletes';
+import { useWorkouts } from '$hooks/useWorkouts';
 import { Container } from '$layouts/container/container';
 import {
-  WorkoutTemplateForm,
-  WorkoutTemplateFormValues,
-} from '$pages/workout-template-form/workout-template-form';
+  WorkoutForm,
+  WorkoutFormValues,
+} from '$pages/workout-form/workout-form';
 import { AngleUnit, SpeedUnit } from '$types/workout-template';
-import { TEMPLATE_FILENAME_EXTENSION } from '$utils/file-helper';
+import { WORKOUT_FILENAME_EXTENSION } from '$utils/file-helper';
 import { useHandleFileUpload } from '$utils/file-helper';
 import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
-export const AddWorkoutTemplateContainer = () => {
+export const AddWorkoutContainer = () => {
   const { uploadedData, handleFileChange, filename } = useHandleFileUpload();
 
   const { push } = useRouter();
 
-  const [, setWorkoutTemplates] = useWorkoutTemplates();
+  const [, setWorkouts] = useWorkouts();
+  const [athletes] = useAthletes();
 
   const onSave = useCallback(
-    (values: WorkoutTemplateFormValues) => {
+    (values: WorkoutFormValues) => {
       const formattedValues = {
         ...values,
         intervals: values.intervals.map((interval, index) => ({
@@ -31,17 +33,19 @@ export const AddWorkoutTemplateContainer = () => {
         })),
       };
 
-      setWorkoutTemplates((prev) => [...prev, formattedValues]);
+      setWorkouts((prev) => [...prev, formattedValues]);
       push('/suunnitelmat');
     },
-    [push, setWorkoutTemplates],
+    [push, setWorkouts],
   );
 
-  const initialValues = useMemo<WorkoutTemplateFormValues>(
+  const initialValues = useMemo<WorkoutFormValues>(
     () =>
       uploadedData ?? {
         id: crypto.randomUUID(),
+        date: new Date(),
         name: '',
+        athlete: '',
         intervals: [],
         speedUnit: SpeedUnit.KMH,
         angleUnit: AngleUnit.DEGREES,
@@ -51,10 +55,7 @@ export const AddWorkoutTemplateContainer = () => {
 
   return (
     <div className="flex flex-col gap-6 my-2">
-      <UpdatePageInfo
-        title="Lisää suunniteltu harjoitus"
-        backLink="/suunnitelmat"
-      />
+      <UpdatePageInfo title="Lisää harjoitus" backLink="/harjoitukset" />
       <Container className="w-full">
         <label
           htmlFor="selectFiles"
@@ -66,15 +67,16 @@ export const AddWorkoutTemplateContainer = () => {
             type="file"
             id="selectFiles"
             onChange={handleFileChange}
-            accept={TEMPLATE_FILENAME_EXTENSION}
+            accept={WORKOUT_FILENAME_EXTENSION}
           />
         </label>
         <span className="ml-2">{filename || 'Ei tiedostoa valittuna'}</span>
       </Container>
 
-      <WorkoutTemplateForm
+      <WorkoutForm
         key={JSON.stringify(initialValues)}
         initialValues={initialValues}
+        athletes={athletes}
         onSave={onSave}
         submitLabel="Tallenna"
       />

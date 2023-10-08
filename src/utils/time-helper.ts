@@ -1,3 +1,7 @@
+const addLeadingZero = (number: number) => number.toString().padStart(2, '0');
+
+// const formatter = new Intl.DateTimeFormat('fi-FI');
+
 export const secondsToTime = (seconds: number): string => {
   const hours = Math.floor(seconds / 3600)
     .toString()
@@ -17,7 +21,6 @@ export const timeToSeconds = (time: string | number): number => {
 };
 
 export const getTimeString = () => {
-  const addLeadingZero = (number: number) => number.toString().padStart(2, '0');
   const now = new Date();
 
   const year = now.getFullYear();
@@ -30,3 +33,26 @@ export const getTimeString = () => {
 
   return `${year}${month}${day}-${hours}${minutes}${seconds}`;
 };
+
+export const formatInputDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+
+  return `${year}-${addLeadingZero(month)}-${addLeadingZero(
+    day,
+  )}T${addLeadingZero(hour)}:${addLeadingZero(minute)}`;
+};
+
+const formatter = new Intl.DateTimeFormat('fi-FI', {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
+});
+
+export const formatDate = (date: Date): string => formatter.format(date);

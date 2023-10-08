@@ -8,7 +8,7 @@ export const useAthletes = () => {
   return useLocalStorage<Athlete[]>('athletes', []);
 };
 
-export const useAthlete = (id: string) => {
+export const useAthlete = (id: string | null) => {
   const [athletes] = useAthletes();
 
   return useMemo(

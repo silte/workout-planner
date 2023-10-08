@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { ChangeEvent, useCallback } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 
-import { AngleUnit, SpeedUnit } from '$types/workout';
+import { AngleUnit, SpeedUnit } from '$types/workout-template';
 import {
   convertDegreesToPercent,
   convertPercentToDegrees,
@@ -15,7 +15,7 @@ interface BaseInputProps {
   help?: string;
   id: string;
   unit?: string;
-  type?: 'text' | 'number' | 'time';
+  type?: 'text' | 'number' | 'time' | 'datetime-local';
   step?: number;
   testId?: string;
 }
@@ -87,6 +87,7 @@ export const Input = ({
 
   const getValueParsingOptions = useCallback(() => {
     if (type === 'number') return { valueAsNumber: true };
+    if (type === 'datetime-local') return { valueAsDate: true };
 
     return {};
   }, [type]);

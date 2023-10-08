@@ -1,7 +1,7 @@
 import { convertDegreesToPercent } from './angle-helper';
 import { distanceFormatter, timeFormatter } from './unit-helper';
 
-import { IntervalTemplate } from '$types/workout';
+import { IntervalTemplate } from '$types/workout-template';
 
 export type IntervalSummary = {
   /** Distance in meters */

@@ -4,7 +4,9 @@ import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 
+import { EditInterval } from './edit-interval';
 import { IntervalListHeader } from './interval-list-header';
+import { IntervalListRow } from './interval-list-row';
 
 import { Form } from '$blocks/form/form';
 import { Button } from '$elements/button/button';
@@ -12,15 +14,15 @@ import { InfoCard } from '$elements/info-card/info-card';
 import { Input } from '$elements/input/input';
 import { Select } from '$elements/select/select';
 import { Container } from '$layouts/container/container';
-import { EditInterval } from '$pages/workout-template-form/edit-interval';
-import { IntervalListRow } from '$pages/workout-template-form/interval-list-row';
+import { Athlete } from '$types/athelete';
+import { Workout } from '$types/workout';
 import {
   AngleUnit,
   IntervalTemplate,
   SpeedUnit,
-  WorkoutTemplate,
 } from '$types/workout-template';
 import { calculateIntervalsTotalSummary } from '$utils/interval-helper';
+import { formatInputDate } from '$utils/time-helper';
 
 const IntervalSummary = () => {
   const intervals = useWatch({
@@ -70,26 +72,32 @@ const angleUnitOptions = [
   },
 ];
 
-type WorkoutTemplateFormProps = {
-  initialValues: WorkoutTemplate;
-  onSave: (values: WorkoutTemplateFormValues) => void;
+type WorkoutFormProps = {
+  initialValues: Workout;
+  athletes: Athlete[];
+  onSave: (values: WorkoutFormValues) => void;
   submitLabel: string;
 };
 
-export type WorkoutTemplateFormValues = WorkoutTemplate;
+export type WorkoutFormValues = Workout;
 
-export const WorkoutTemplateForm = ({
+export const WorkoutForm = ({
   initialValues,
   onSave,
   submitLabel,
-}: WorkoutTemplateFormProps) => {
+  athletes,
+}: WorkoutFormProps) => {
   const [intervalToEdit, setIntervalToEdit] = useState<number>(NaN);
 
-  const formMethods = useForm<WorkoutTemplateFormValues>({
-    defaultValues: initialValues,
+  const formMethods = useForm<WorkoutFormValues>({
+    defaultValues: {
+      ...initialValues,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      date: formatInputDate(initialValues.date) as any,
+    },
   });
 
-  const { append, remove, fields } = useFieldArray<WorkoutTemplateFormValues>({
+  const { append, remove, fields } = useFieldArray<WorkoutFormValues>({
     name: 'intervals',
     control: formMethods.control,
   });
@@ -102,10 +110,23 @@ export const WorkoutTemplateForm = ({
       duration: 0,
       angle: 0,
       speed: 0,
+      hr: [],
+      hasStartHr: false,
       index,
     });
     setIntervalToEdit(index);
   }, [append, fields.length]);
+
+  const athleteOptions = useMemo(
+    () => [
+      { label: 'Valitse', value: '' },
+      ...athletes.map((athlete) => ({
+        label: athlete.name,
+        value: athlete.id,
+      })),
+    ],
+    [athletes],
+  );
 
   return (
     <Container className="w-full">
@@ -114,6 +135,12 @@ export const WorkoutTemplateForm = ({
           <Input id="name" isRequired>
             Nimi
           </Input>
+          <Input id="date" type="datetime-local" isRequired>
+            Päivä
+          </Input>
+          <Select id="athlete" options={athleteOptions}>
+            Urheilija
+          </Select>
           <Select id={'speedUnit'} options={speedUnitOptions}>
             Nopeuden yksikkö
           </Select>

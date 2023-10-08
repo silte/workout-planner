@@ -3,34 +3,34 @@
 import { notFound, useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
+import { useAthletes } from '$hooks/useAthletes';
+import { useWorkout, useWorkouts } from '$hooks/useWorkouts';
 import {
-  useWorkoutTemplate,
-  useWorkoutTemplates,
-} from '$hooks/useWorkoutTemplates';
-import {
-  WorkoutTemplateForm,
-  WorkoutTemplateFormValues,
-} from '$pages/workout-template-form/workout-template-form';
+  WorkoutForm,
+  WorkoutFormValues,
+} from '$pages/workout-form/workout-form';
 import { UpdatePageInfo } from 'src/components/renderers/update-page-info';
 
 type EditWorkoutTemplateContainerProps = {
   id: string;
 };
 
-export const EditWorkoutTemplateContainer = ({
+export const EditWorkoutContainer = ({
   id,
 }: EditWorkoutTemplateContainerProps) => {
   const { push } = useRouter();
 
-  const [, setWorkoutTemplates] = useWorkoutTemplates();
-  const template = useWorkoutTemplate(id);
+  const [, setWorkoutTemplates] = useWorkouts();
+  const workout = useWorkout(id);
 
-  if (!template) {
+  const [athletes] = useAthletes();
+
+  if (!workout) {
     notFound();
   }
 
   const onSave = useCallback(
-    (values: WorkoutTemplateFormValues) => {
+    (values: WorkoutFormValues) => {
       const formattedValues = {
         ...values,
         intervals: values.intervals.map((interval, index) => ({
@@ -44,7 +44,7 @@ export const EditWorkoutTemplateContainer = ({
           item.id === formattedValues.id ? formattedValues : item,
         ),
       );
-      push(`/suunnitelmat/${formattedValues.id}`);
+      push(`/harjoitukset/${formattedValues.id}`);
     },
     [push, setWorkoutTemplates],
   );
@@ -52,11 +52,12 @@ export const EditWorkoutTemplateContainer = ({
   return (
     <>
       <UpdatePageInfo
-        title={`Muokkaa - ${template.name}`}
-        backLink={`/suunnitelmat/${template.id}`}
+        title={`Muokkaa - ${workout.name}`}
+        backLink={`/harjoitukset/${workout.id}`}
       />
-      <WorkoutTemplateForm
-        initialValues={template}
+      <WorkoutForm
+        initialValues={workout}
+        athletes={athletes}
         onSave={onSave}
         submitLabel="Tallenna"
       />

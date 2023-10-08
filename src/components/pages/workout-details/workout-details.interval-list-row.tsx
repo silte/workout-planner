@@ -1,4 +1,8 @@
-import { AngleUnit, IntervalTemplate, SpeedUnit } from '$types/workout';
+import {
+  AngleUnit,
+  IntervalTemplate,
+  SpeedUnit,
+} from '$types/workout-template';
 import { convertDegreesToPercent } from '$utils/angle-helper';
 import { calculateIntervalSummary } from '$utils/interval-helper';
 import { convertKmhToMinkm } from '$utils/speed-helper';

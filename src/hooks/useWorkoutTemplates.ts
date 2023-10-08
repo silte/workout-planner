@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import { useLocalStorage } from './useLocalStorage';
 
-import { WorkoutTemplate } from '$types/workout';
+import { WorkoutTemplate } from '$types/workout-template';
 
 export const useWorkoutTemplates = () => {
   return useLocalStorage<WorkoutTemplate[]>('workout-templates', []);
