@@ -168,6 +168,7 @@ export const WorkoutForm = ({
         </div>
         <IntervalSummary />
         <EditInterval
+          key={intervalToEdit}
           onClose={() => setIntervalToEdit(NaN)}
           index={intervalToEdit}
         />

@@ -62,7 +62,9 @@ const HrRow = ({ intervalIndex, hrIndex, onRemove }: HrRowProps) => {
 
   return (
     <div className="flex items-end justify-between gap-2">
-      <Input id={`intervals.${intervalIndex}.hr.${hrIndex}`}>{label}</Input>
+      <Input id={`intervals.${intervalIndex}.hr.${hrIndex}`} type="number">
+        {label}
+      </Input>
       <div>
         <Button onClick={onRemove}>
           <Icon type={IconName.trash} />

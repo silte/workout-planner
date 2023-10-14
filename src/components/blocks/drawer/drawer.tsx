@@ -84,7 +84,7 @@ export const Drawer = ({
 
   const drawerClasses = {
     left: clsx('', {
-      ['md:top-0 md:bottom-0 md:overflow-y-auto']: true,
+      ['md:top-0 md:bottom-0 overflow-y-auto']: true,
       ['md:max-w-[600px] md:w-[75%]']: true,
       ['md:right-0']: true,
       ['md:aria-hidden:-right-[100vw]']: true,
@@ -92,8 +92,9 @@ export const Drawer = ({
     bottom: clsx('', {
       ['max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:px-8 max-md:pb-12 max-md:pt-8']:
         true,
-      ['max-md:rounded-t-2xl max-md:box-content']: true,
+      ['max-md:rounded-t-2xl']: true,
       ['max-md:aria-hidden:-bottom-[100vh]']: true,
+      ['max-md:max-h-full']: true,
     }),
   };
 
@@ -106,7 +107,7 @@ export const Drawer = ({
 
   const drawerBaseClasses = clsx('', {
     [className]: true,
-    ['bg-white fixed transition-all z-20 duration-200']: true,
+    ['bg-white fixed transition-all z-[110] duration-200']: true,
     [defaultDrawerClasses]: true,
     ['hidden']: isClosedDelay,
   });
@@ -134,7 +135,7 @@ export const Drawer = ({
           className={clsx(
             'fixed inset-0 bg-black/[.50] transition-opacity duration-200',
             {
-              ['z-10 opacity-100']: isOpen,
+              ['z-[100] opacity-100']: isOpen,
               ['-z-10 opacity-0']: !isOpen || !isOpenDelayed,
             },
           )}
