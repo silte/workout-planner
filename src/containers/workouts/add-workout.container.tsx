@@ -34,7 +34,7 @@ export const AddWorkoutContainer = () => {
       };
 
       setWorkouts((prev) => [...prev, formattedValues]);
-      push('/suunnitelmat');
+      push('/harjoitukset');
     },
     [push, setWorkouts],
   );
